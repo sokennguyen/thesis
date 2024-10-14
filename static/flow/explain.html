@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title of the document</title>
+
+    <!-- <meta http-equiv="refresh" content="2"> -->
+    <!-- this refreshes the brower every 2 secs -->
+
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/flow.css">
+
+</head>
+<body>
+    <main class="main" >
+        <div class="explain-container">
+            <div class="content">
+                <p>Now a series of web pages will be presented to you.</p>
+                <p>When you click the "<span class="highlight">Next</span>" button bellow, a new browser tab will be opened with the first web page.</p>
+                <p>Please go through the page just like how you'd normally do when browisng the internet.</p>
+                <p>Try to remember how you feel about the web page, as you will tell those feelings again at the end of this experience.</p>
+            </div>
+            <a href="#" onclick="newTabAndChangeOg()">Next</a>
+            <script>
+                const newTabAndChangeOg = () => {
+                    const newTab = window.open('http://localhost:8080/first-ver', '_blank');
+                    window.location.href = "http://localhost:8080/flow/interim.html"
+                }
+            </script>
+        </div>
+    </main>
+</body>
+
+</html>
