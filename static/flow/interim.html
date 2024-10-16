@@ -21,9 +21,9 @@
             <a href="#" onclick="newTabAndChangeOg()">Next</a>
             <script>
                 const newTabAndChangeOg = () => {
-                    const newTab = window.open('http://localhost:8080/first-ver', '_blank');
+                    const newTab = window.open('/first-ver', '_blank');
                     const id = window.location.search.substr(1)
-                    window.location.href = "http://localhost:8080/survey/start.html?"+id
+                    window.location.href = "/survey/start.html?"+id
                 }
             </script>
         </div>
