@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-	"net/url"
 
     "fmt"
     "io"
@@ -36,6 +35,7 @@ func agePost(c *gin.Context) {
     c.Redirect(http.StatusFound, "/flow/explain.html?id=321")
 }
 
+/*
 func getFlowWithReferer(c *gin.Context) {
     referer := c.Request.Referer() // Get the Referer header
     refererUrl,err := url.Parse(referer)
@@ -47,8 +47,9 @@ func getFlowWithReferer(c *gin.Context) {
     finalUrlWithId := requestedURL + "?id=" + id
     c.Redirect(http.StatusFound, "/flow/explain.html?id=321")
 }
+*/
 
-func post(c *gin.Context) {
+func postFirst(c *gin.Context) {
     body, _ := io.ReadAll(c.Request.Body)
     fmt.Println(string(body))
 }
@@ -69,9 +70,9 @@ func main() {
 
 	r.GET("/", getFlow)
 	r.GET("/first-ver", getFirst)
-    r.GET("/flow/interim.html", getFlowWithReferer)
 
     r.POST("/flow/age.html", agePost)
+    r.POST("/first-ver", postFirst)
 
 
 	r.Run(":8080")
