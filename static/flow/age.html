@@ -6,8 +6,8 @@
     <!-- <meta http-equiv="refresh" content="2"> -->
     <!-- this refreshes the brower every 2 secs -->
 
-    <link rel="stylesheet" href="/normalize.css">
-    <link rel="stylesheet" href="/flow.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/flow.css">
 
 </head>
 <body>
@@ -16,9 +16,10 @@
             <div class="question">
                 What is your age?
             </div>  
-            <form class="answer">
+            <!-- TODO: change this form to post -->
+            <form method="post" action="/flow/age.html" class="answer">
                 <input type="number" placeholder="Your answer here... (in numbers)"></input>
-                <a href="/flow/explain.html">Next -></a>
+                <a onclick="this.parentNode.submit()">Next -></a>
             </form>
         </div>
     </main>

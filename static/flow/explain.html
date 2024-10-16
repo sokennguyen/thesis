@@ -6,8 +6,8 @@
     <!-- <meta http-equiv="refresh" content="2"> -->
     <!-- this refreshes the brower every 2 secs -->
 
-    <link rel="stylesheet" href="/normalize.css">
-    <link rel="stylesheet" href="/flow.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/flow.css">
 
 </head>
 <body>
@@ -22,8 +22,10 @@
             <a href="#" onclick="newTabAndChangeOg()">Next</a>
             <script>
                 const newTabAndChangeOg = () => {
+                    //hard link remove
                     const newTab = window.open('http://localhost:8080/first-ver', '_blank');
-                    window.location.href = "http://localhost:8080/flow/interim.html"
+                    const id = window.location.search.substr(1)
+                    window.location.href = "http://localhost:8080/flow/interim.html?"+id
                 }
             </script>
         </div>
