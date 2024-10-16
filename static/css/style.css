@@ -78,26 +78,26 @@ main{
 section:not(.hero) {
     height: 80vh;
 }
-.big-feat{
+section[class*='big-feat']{
     background-color: blue;
     display: flex;
 }
-.big-feat .item{
+section[class*='big-feat'] .item{
     flex-basis: 100%;
 }
-.big-feat .left, .big-feat .right{
+section[class*='big-feat'] .left,section[class*='big-feat'] .right{
     display: flex;
     align-items: center;
     
 }
-.big-feat .container{
+section[class*='big-feat'] .container{
     height:70%;
     background-color: red;
     margin-left: 5em;
     width: 20em;
     box-sizing: border-box;
 }
-.big-feat img{
+section[class*='big-feat'] img{
     width: 100%;
 }
 .cta {
