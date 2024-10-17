@@ -18,7 +18,7 @@
             </div>  
             <!-- TODO: change this form to post -->
             <form method="post" action="/flow/age.html" class="answer">
-                <input type="number" name="age" placeholder="Your answer here... (in numbers)"></input>
+                <input type="number" required name="age" placeholder="Your answer here... (in numbers)"></input>
                 <input type="hidden" name="swidth" id="swidth"></input>
                 <input type="hidden" name="sheight" id="sheight"></input>
                 <input type="hidden" name="country" id="country"></input>
@@ -32,7 +32,7 @@
                             countryInput.value = data;
                         }).catch(error => {
                             console.log('ad blocked country fetch')
-                            countryInput.remove();
+                            countryInput.value = 'blocked';
                         })
 
 
