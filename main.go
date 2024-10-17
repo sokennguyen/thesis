@@ -32,6 +32,8 @@ func getFlow(c *gin.Context) {
 func agePost(c *gin.Context) {
     //TODO: gen new ID here
     //TODO: get age from response here
+    body, _ := io.ReadAll(c.Request.Body)
+    fmt.Println(string(body))
     c.Redirect(http.StatusFound, "/flow/explain.html?id=321")
 }
 

@@ -18,7 +18,29 @@
             </div>  
             <!-- TODO: change this form to post -->
             <form method="post" action="/flow/age.html" class="answer">
-                <input type="number" placeholder="Your answer here... (in numbers)"></input>
+                <input type="number" name="age" placeholder="Your answer here... (in numbers)"></input>
+                <input type="hidden" name="swidth" id="swidth"></input>
+                <input type="hidden" name="sheight" id="sheight"></input>
+                <input type="hidden" name="country" id="country"></input>
+                <script> 
+                    const promiseOfSomeData = fetch("https://ipapi.co/country_name").then(r=>r.json()).then(data => {
+                        return data;
+                    });
+                    let country;
+                    window.onload = async () => {
+                        country = await promiseOfSomeJsonData;
+                    };
+                    const swidth = window.screen.width
+                    const sheight = window.screen.height
+                    
+                    const countryInput = document.getElementById('country')
+                    const swidthInput = document.getElementById('swidth')
+                    const sheightInput = document.getElementById('sheight')
+
+                    countryInput.value = country
+                    swidthInput.value = swidth
+                    sheightInput.value = sheight
+                </script>
                 <a onclick="this.parentNode.submit()">Next -></a>
             </form>
         </div>
