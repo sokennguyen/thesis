@@ -3,21 +3,23 @@ package main
 import (
 	"net/http"
 
+
     "fmt"
     "io"
 
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
+
+    "database/sql"
+    _ "github.com/mattn/go-sqlite3"
+
+
 )
 
-type Count struct {
-	Count int
-}
-
-func render(c *gin.Context, template templ.Component, status int) error {
-	c.Header("Content-Type", "text/html")
-	c.Status(status)
-	return template.Render(c.Request.Context(), c.Writer)
+type Test struct {
+	Age  int
+	ScreenWidth int
+	ScreenHeight  int
 }
 
 
@@ -34,26 +36,50 @@ func agePost(c *gin.Context) {
     //TODO: get age from response here
     body, _ := io.ReadAll(c.Request.Body)
     fmt.Println(string(body))
+
+    //connect db
+    db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+    checkErr(err)
+    stmt, err := db.Prepare("INSERT INTO main(age) values(?)")
+    checkErr(err)
+    res, err := stmt.Exec(12313132);
+    checkErr(err)
+
+    //check insert
+    id, err := res.LastInsertId()
+    checkErr(err)
+    fmt.Println(id)
+    rows, err := db.Query("SELECT age FROM main WHERE rowid=(?)",id)
+    checkErr(err)
+    for rows.Next() {
+        var age string
+        if err := rows.Scan(&age); err != nil {
+            checkErr(err)
+        }
+        fmt.Printf("Age is %s", age)
+    }
+
+
     c.Redirect(http.StatusFound, "/flow/explain.html?id=321")
 }
 
-/*
-func getFlowWithReferer(c *gin.Context) {
-    referer := c.Request.Referer() // Get the Referer header
-    refererUrl,err := url.Parse(referer)
-    // Get the parameters
-    queryParams := refererURL.Query()
-    id := queryParams.Get("id")
-
-    requestedURL := c.Request.URL.String()
-    finalUrlWithId := requestedURL + "?id=" + id
-    c.Redirect(http.StatusFound, "/flow/explain.html?id=321")
+func checkErr(err error) {
+    if err != nil {
+        panic(err)
+    }
 }
-*/
+
 
 func postFirst(c *gin.Context) {
     body, _ := io.ReadAll(c.Request.Body)
     fmt.Println(string(body))
+}
+
+
+func render(c *gin.Context, template templ.Component, status int) error {
+	c.Header("Content-Type", "text/html")
+	c.Status(status)
+	return template.Render(c.Request.Context(), c.Writer)
 }
 
 func main() {
