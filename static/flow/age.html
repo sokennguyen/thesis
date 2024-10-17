@@ -24,18 +24,24 @@
                 <input type="hidden" name="country" id="country"></input>
                 <script> 
                     const insertData = async () => {
-                        let country;
+                        const countryInput = document.getElementById('country')
                         const promiseOfSomeData = await fetch("https://ipapi.co/country_name").then(res => {
-                            return res;
-                        }).then(data => {country = data});
+                            return res.text();
+                        }).then(data => {
+                            console.log(data)
+                            countryInput.value = data;
+                        }).catch(error => {
+                            console.log('ad blocked country fetch')
+                            countryInput.remove();
+                        })
+
+
                         const swidth = window.screen.width
                         const sheight = window.screen.height
-                        
-                        const countryInput = document.getElementById('country')
+
                         const swidthInput = document.getElementById('swidth')
                         const sheightInput = document.getElementById('sheight')
 
-                        countryInput.value = country
                         swidthInput.value = swidth
                         sheightInput.value = sheight
                     }
