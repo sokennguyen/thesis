@@ -23,9 +23,10 @@
                 <input type="hidden" name="sheight" id="sheight"></input>
                 <input type="hidden" name="country" id="country"></input>
                 <script> 
+                    let country;
                     const promiseOfSomeData = fetch("https://ipapi.co/country_name").then(res => {
                         return res;
-                    }).then(data => {let country = data});
+                    }).then(data => {country = data});
                     const swidth = window.screen.width
                     const sheight = window.screen.height
                     
