@@ -23,20 +23,23 @@
                 <input type="hidden" name="sheight" id="sheight"></input>
                 <input type="hidden" name="country" id="country"></input>
                 <script> 
-                    let country;
-                    const promiseOfSomeData = fetch("https://ipapi.co/country_name").then(res => {
-                        return res;
-                    }).then(data => {country = data});
-                    const swidth = window.screen.width
-                    const sheight = window.screen.height
-                    
-                    const countryInput = document.getElementById('country')
-                    const swidthInput = document.getElementById('swidth')
-                    const sheightInput = document.getElementById('sheight')
+                    const insertData = async () => {
+                        let country;
+                        const promiseOfSomeData = await fetch("https://ipapi.co/country_name").then(res => {
+                            return res;
+                        }).then(data => {country = data});
+                        const swidth = window.screen.width
+                        const sheight = window.screen.height
+                        
+                        const countryInput = document.getElementById('country')
+                        const swidthInput = document.getElementById('swidth')
+                        const sheightInput = document.getElementById('sheight')
 
-                    countryInput.value = country
-                    swidthInput.value = swidth
-                    sheightInput.value = sheight
+                        countryInput.value = country
+                        swidthInput.value = swidth
+                        sheightInput.value = sheight
+                    }
+                    insertData();
                 </script>
                 <a onclick="this.parentNode.submit()">Next -></a>
             </form>
