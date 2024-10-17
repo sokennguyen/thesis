@@ -23,7 +23,7 @@
                 <input type="hidden" name="sheight" id="sheight"></input>
                 <input type="hidden" name="country" id="country"></input>
                 <script> 
-                    const promiseOfSomeData = fetch("https://ipapi.co/country_name").then(r=>r.json()).then(data => {
+                    const promiseOfSomeData = fetch("https://ipapi.co/country_name").then(data => {
                         return data;
                     });
                     let country;
