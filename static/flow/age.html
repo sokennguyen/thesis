@@ -23,13 +23,9 @@
                 <input type="hidden" name="sheight" id="sheight"></input>
                 <input type="hidden" name="country" id="country"></input>
                 <script> 
-                    const promiseOfSomeData = fetch("https://ipapi.co/country_name").then(data => {
-                        return data;
-                    });
-                    let country;
-                    window.onload = async () => {
-                        country = await promiseOfSomeJsonData;
-                    };
+                    const promiseOfSomeData = fetch("https://ipapi.co/country_name").then(res => {
+                        return res;
+                    }).then(data => {let country = data});
                     const swidth = window.screen.width
                     const sheight = window.screen.height
                     
