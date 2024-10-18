@@ -22,8 +22,8 @@
             <a href="#" onclick="newTabAndChangeOg()">Next</a>
             <script>
                 const newTabAndChangeOg = () => {
-                    const newTab = window.open('/first-ver', '_blank');
                     const id = window.location.search.substr(1)
+                    const newTab = window.open('/first-ver?'+id, '_blank');
                     window.location.href = "/flow/interim.html?"+id
                 }
             </script>

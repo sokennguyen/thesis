@@ -21,21 +21,8 @@
                 <input type="number" required name="age" placeholder="Your answer here... (in numbers)"></input>
                 <input type="hidden" name="swidth" id="swidth"></input>
                 <input type="hidden" name="sheight" id="sheight"></input>
-                <input type="hidden" name="country" id="country"></input>
                 <script> 
                     const insertData = async () => {
-                        const countryInput = document.getElementById('country')
-                        const promiseOfSomeData = await fetch("https://ipapi.co/country_name").then(res => {
-                            return res.text();
-                        }).then(data => {
-                            console.log(data)
-                            countryInput.value = data;
-                        }).catch(error => {
-                            console.log('ad blocked country fetch')
-                            countryInput.value = 'blocked';
-                        })
-
-
                         const swidth = window.screen.width
                         const sheight = window.screen.height
 
