@@ -105,7 +105,13 @@ window.onload = function() {
 function sendPostRequest(event) {
     xmlhttp=new XMLHttpRequest();
     const id = window.location.search.substr(1)
-    xmlhttp.open("POST","/first-ver?"+id,true);
+    const path = location.pathname.split('/')[1]
+    if (path.includes("second")){
+        xmlhttp.open("POST","/second-ver?"+id,true);
+    }
+    else {
+        xmlhttp.open("POST","/first-ver?"+id,true);
+    }
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();

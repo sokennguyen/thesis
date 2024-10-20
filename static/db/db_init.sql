@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS main (
     screen_width VARCHAR(255),
     screen_height VARCHAR(255),
 
+    version int,
+
     click_nav_feat INT DEFAULT 0,
     click_nav_price INT DEFAULT 0,
     click_nav_login INT DEFAULT 0,
