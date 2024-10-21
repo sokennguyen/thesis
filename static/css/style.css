@@ -34,7 +34,7 @@ main{
     align-items: center;
     font-size: 1.5rem;
 }
-.hero .cta, .start, #ending-cta-btn{
+.hero .cta, .start, #big-feat2-cta, #ending-cta-btn{
     background-color: #FFA500;
     border: solid;
     border-radius: 0.5rem;
@@ -42,25 +42,45 @@ main{
     transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
     padding: 10px 30px;
 }
-.hero .cta{
+.hero .cta {
     padding: 25px 100px;
     font-size: 1.4rem;
+}
+#big-feat2-cta {
+    padding: 15px 80px;
+    font-size: 1.4rem;
+}
+.bigfeat2-container{
+    display: flex;
+    justify-content: center; 
 }
 #ending-cta-btn{
     padding: 30px 100px;
     background-color: white;
     font-size: 1.4rem;
 }
-.hero .cta:hover, .start:hover, #ending-cta-btn:hover{
+.hero .cta:hover, .start:hover, #big-feat2-cta:hover, #ending-cta-btn:hover{
     cursor: pointer;
 }
-.hero .cta:active, .start:active, #ending-cta-btn:active{
+.hero .cta:active, .start:active, #big-feat2-cta:active, #ending-cta-btn:active{
     background-color: #BF7C00;
     border-color: #000000;
     transform: scale(.96);
 }
 #ending-cta-btn:active{
     background-color: grey;
+}
+.big-feat3-more, .big-feat4-more{
+    text-decoration: underline;
+    color: black;
+    font-size: 1.4rem;
+    user-select: none;
+}
+.big-feat3-more:hover, .big-feat4-more:hover{
+    cursor: pointer;
+}
+.big-feat3-more:hover{
+    cursor: pointer;
 }
 .hero .login{
     color: black;
@@ -167,6 +187,7 @@ section[class*='big-feat'] .title{
 }
 section[class*='big-feat'] .desc{
     font-size: 1.5rem;
+    margin-bottom: 2rem;
 }
 section.cta {
     height: 100vh;
@@ -219,6 +240,10 @@ footer .logo{
 footer .title{
     font-size: 1.6rem;
     font-weight: 500; 
+}
+footer a:hover{
+    cursor: pointer; 
+    user-select: none;
 }
 .logo img{
     width: 100%;

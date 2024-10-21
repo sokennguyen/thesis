@@ -3,7 +3,8 @@ const clickElements = [
     'hero-cta', 'hero-login', 'small-feat1-pic', 
     'small-feat2-pic', 'small-feat3-pic', 'headstart', 
     'consistency','headstart', 'determination', 'big-feat1-img', 
-    'big-feat2-img', 'big-feat3-img', 'big-feat4-img', 
+    'big-feat2-img', 'big-feat2-cta', 'big-feat3-img', 
+    'big-feat3-more','big-feat4-img', 'big-feat4-more',
     'ending-cta-btn'
 ];
 
