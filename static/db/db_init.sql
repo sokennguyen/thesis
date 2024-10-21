@@ -51,5 +51,12 @@ CREATE TABLE IF NOT EXISTS main (
     hover_footer_logo FLOAT DEFAULT 0,
     hover_footer_product FLOAT DEFAULT 0,
     hover_footer_company FLOAT DEFAULT 0,
-    hover_footer_legal FLOAT DEFAULT 0   
+    hover_footer_legal FLOAT DEFAULT 0   ,
+
+    survey_1 VARCHAR(255),
+    survey_2 VARCHAR(255),
+    survey_3 VARCHAR(255),
+    survey_4 VARCHAR(255),
+    survey_5 VARCHAR(255),
+    survey_6 VARCHAR(255)
 )

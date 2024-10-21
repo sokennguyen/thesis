@@ -16,12 +16,11 @@
             <div class="content">
                 <p>What was your overall experience with the <span class="highlight">first</span> version of the landing page? How did you feel while viewing it?</p> 
                 <div class="form-container">
-                    <form >
-                        <textarea placeholder="Your answer here..."></textarea>
+                    <form method="post" class="answer">
+                        <textarea name="answer" placeholder="Your answer here..."></textarea>
+                        <a onclick="this.parentNode.submit()">Next -></a>
                     </form> 
                 </div>
-                <!--submit this data then BACKEND return the next page-->
-                <a href="/survey/3.html">Next</a>
             </div>
         </div>
     </main>

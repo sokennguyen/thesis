@@ -16,12 +16,11 @@
             <div class="content">
                 <p>In the <span class="highlight">second</span> of the landing page, you spent ____ seconds on the _____ section. Can you share what caught your attention or what might have caused you to stay there?</p> 
                 <div class="form-container">
-                    <form >
-                        <textarea placeholder="Your answer here..."></textarea>
+                    <form method="post" class="answer">
+                        <textarea name="answer" placeholder="Your answer here..."></textarea>
+                        <a onclick="this.parentNode.submit()">Next -></a>
                     </form> 
                 </div>
-                <!--submit this data then BACKEND return the next page-->
-                <a href="/survey/6.html">Next</a>
             </div>
         </div>
     </main>

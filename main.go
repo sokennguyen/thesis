@@ -8,6 +8,7 @@ import (
     "fmt"
     "io"
     "strconv" 
+    "strings"
 
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
@@ -235,6 +236,48 @@ func agePost(c *gin.Context) {
     c.Redirect(http.StatusFound, "/flow/explain.html?id="+strconv.Itoa(count))
 }
 
+func getBodyString(c *gin.Context) string {
+    body, _ := io.ReadAll(c.Request.Body)
+    return string(body)//this value is byte so it needs stringified
+    
+}
+func getAnswerFromBody(body string) string {
+    //parse stringed body
+    values, err := url.ParseQuery(body) 
+    checkErr(err)
+
+    // Accessing the values
+    return values.Get("answer")
+}
+
+func postSurvey(c *gin.Context) {
+    stringedBody := getBodyString(c)
+    answer := getAnswerFromBody(stringedBody)
+    fmt.Println("choice: "+answer)
+
+
+    //connect and insert 
+    db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+    checkErr(err)
+
+    //get questionNumber from url param
+    pageUrl := c.Param("pageUrl")
+    questionNumber := strings.Split(pageUrl, ".")[0]
+    fmt.Println("questionNumber: "+questionNumber)
+
+    id := c.Query("id")
+    stmt, err := db.Prepare("UPDATE main SET survey_"+ questionNumber +" = ? WHERE rowid = ?")
+    checkErr(err)
+    res, err := stmt.Exec(answer, id);
+    checkErr(err)
+    fmt.Println(res.RowsAffected());
+
+
+    questionNumberInt,err := strconv.Atoi(questionNumber)
+    checkErr(err)
+    nextQuestionNumber := questionNumberInt + 1 
+    c.Redirect(http.StatusFound, "/survey/"  + strconv.Itoa(nextQuestionNumber) + ".html?id=" + id)
+}
 
 func checkErr(err error) {
     if err != nil {
@@ -272,6 +315,8 @@ func main() {
     r.POST("/flow/age.html", agePost)
     r.POST("/first-ver", postLanding(1))
     r.POST("/second-ver", postLanding(2))
+
+    r.POST("/survey/:pageUrl", postSurvey)
 
 
 	r.Run(":8080")
