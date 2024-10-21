@@ -64,6 +64,10 @@ main{
 }
 .hero .login{
     color: black;
+    text-decoration: underline;
+}
+.hero .login:hover{
+    cursor: pointer;
 }
 .nav-link-container{
     display: flex;
@@ -76,6 +80,10 @@ main{
     font-size: 1.4rem;
     text-decoration: none;
     padding: 10px 30px;
+}
+.nav-link:hover{
+    cursor: pointer;
+    user-select: none;
 }
 .nav-link.start{
     text-align: center;
