@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS main (
-    pid INT PRIMARY KEY,
+    pid INT,
     age INT,
     conversion BOOL,
     bounce BOOL,

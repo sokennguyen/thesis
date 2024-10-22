@@ -4,20 +4,18 @@ import (
 	"net/http"
 	"net/url"
 
-
-    "fmt"
-    "io"
-    "strconv" 
-    "strings"
+	"fmt"
+	"io"
+	"strconv"
+	"strings"
 
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
 
-    "encoding/json"
-    "database/sql"
-    _ "github.com/mattn/go-sqlite3"
+	"database/sql"
+	"encoding/json"
 
-
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var count int = 0;
@@ -33,7 +31,6 @@ type AgeScreenData struct {
 	ScreenWidth int
 	ScreenHeight  int
 }
-
 type InteractionData struct {
     Hovers map[string]float64 `json:"hovers"`
     Clicks map[string]float64 `json:"clicks"`
@@ -78,12 +75,59 @@ func postLanding(ver int) gin.HandlerFunc {
         }
         fmt.Println(combinedData)
 
+        testid := c.Query("id")
+        fmt.Println("testid: " + testid)
+        fmt.Println("version: " + strconv.Itoa(ver))
+        testidInt, err := strconv.Atoi(testid)
+        checkErr(err)
+
         db, err := sql.Open("sqlite3", "./static/db/thesis.db")
         checkErr(err)
+         
+        //check if 1st phase is done or not
+        //if version is not empty then first post of 2nd phase will INSERT a new row
+        //if version is empty then update everything
+        rows, err := db.Query("SELECT age, version FROM main WHERE pid = (?)",testid)
+        checkErr(err)
+
+        var age sql.NullInt16
+        var version sql.NullInt16
+        rowsCount := 0
+        for rows.Next() {
+            if err := rows.Scan(&age, &version ); err != nil {
+                checkErr(err)
+            }
+            rowsCount++
+            fmt.Println(age.Valid)
+            fmt.Println(version.Valid)
+        }
+        if age.Valid  && !(version.Valid) && rowsCount == 1 {
+                setVerStmt, err := db.Prepare("UPDATE main SET version = ? WHERE pid = ?")
+                checkErr(err)
+                _,err = setVerStmt.Exec(ver, testid)
+                checkErr(err)
+                fmt.Println("update ended")
+                insertStmt, err := db.Prepare("INSERT INTO main(pid) VALUES (?)")
+                checkErr(err)
+                _,err = insertStmt.Exec(testidInt)
+                checkErr(err)
+                fmt.Println("insert ended")
+                fmt.Println("Second phase row inserted")
+                setVerStmt, err = db.Prepare("UPDATE main SET version = ? WHERE pid = ? AND version is null")
+                checkErr(err)
+                if (ver==1) {
+                    _,err = setVerStmt.Exec(2,testidInt)
+                    checkErr(err)
+                } else if (ver == 2) {
+                    _,err = setVerStmt.Exec(1,testidInt)
+                    checkErr(err)
+                }
+                fmt.Println("Second phase row's version update")
+        }
+
         stmt, err := db.Prepare(`
                 UPDATE main 
-                SET version = ?,
-                    click_nav_feat = ?,
+                SET click_nav_feat = ?,
                     click_nav_price = ?,
                     click_nav_login = ?,
                     click_nav_start = ?,
@@ -154,22 +198,18 @@ func postLanding(ver int) gin.HandlerFunc {
                     hover_footer_product = ?,
                     hover_footer_company = ?,
                     hover_footer_legal = ? 
-                WHERE rowid = ?
+                WHERE pid = ? AND version = ?
         `)
         checkErr(err)
 
-        rowid := c.Query("id")
-        fmt.Println("rowid: " + rowid)
-        fmt.Println("version: " + strconv.Itoa(ver))
 
-        if rowid == "" {
-            c.JSON(http.StatusBadRequest, gin.H{"error": "Missing rowid parameter"})
+        if testid == "" {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Missing testid parameter"})
             return
         }
 
 
         data := []interface{}{
-            ver,
             combinedData["nav-feat"],
             combinedData["nav-price"],
             combinedData["nav-login"],
@@ -242,7 +282,8 @@ func postLanding(ver int) gin.HandlerFunc {
             combinedData["hover-footer-company"],
             combinedData["hover-footer-legal"],
 
-            rowid, // The user ID to identify the row to update
+            testid, // The user ID to identify the row to update
+            ver,
         }
         _,err = stmt.Exec(data...)
         checkErr(err)
@@ -270,9 +311,9 @@ func agePost(c *gin.Context) {
     //connect and insert 
     db, err := sql.Open("sqlite3", "./static/db/thesis.db")
     checkErr(err)
-    stmt, err := db.Prepare("INSERT INTO main(age, screen_width, screen_height) values(?,?,?)")
+    stmt, err := db.Prepare("INSERT INTO main(pid, age, screen_width, screen_height) values(?,?,?,?)")
     checkErr(err)
-    res, err := stmt.Exec( age, swidth, sheight);
+    res, err := stmt.Exec(count+1, age, swidth, sheight);
     checkErr(err)
 
 
@@ -324,7 +365,7 @@ func postSurvey(c *gin.Context) {
     fmt.Println("questionNumber: "+questionNumber)
 
     id := c.Query("id")
-    stmt, err := db.Prepare("UPDATE main SET survey_"+ questionNumber +" = ? WHERE rowid = ?")
+    stmt, err := db.Prepare("UPDATE main SET survey_"+ questionNumber +" = ? WHERE pid = ?")
     checkErr(err)
     res, err := stmt.Exec(answer, id);
     checkErr(err)
