@@ -11,7 +11,20 @@
 
 </head>
 <body>
-    <main class="main" >
+    <script>
+        window.onload = () => {
+            if (window.screen.width < 431) {
+                document.getElementById('main').style.display = 'none'
+                document.getElementById('blocking-phones').style.display = 'flex'
+            }   
+        }
+    </script>
+    <div id="blocking-phones" style="font-size: 5rem; display: none; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+        <p>You are viewing on a mobile phone, or a narrow browser tab.</p>
+        <p>This experiment requires a laptop/desktop screen, and a wide browser tab.</p>
+        <p>Please access this link again on laptop/desktop, or a wider browser tab to start.</p>
+    </div>
+    <main class="main" id="main">
         <div class="title">
             <div class="hero">
                 SaaS Landing Page Performance
@@ -30,7 +43,7 @@
                     <p>During the test, we will collect data on you usage patterns, interactions, and feedback.</p>
                     <p>All data collected will be used strictly for academic purposes.</p>
                     <p>Your data will remain anonymous and confidential; no identifying information will be associated with the results.</p>
-                    <p>Participation is voluntary, and you are free to withdraw at any time without penalty. If you choose to withdraw, any data collected yp to that point will be discarded</p>
+                    <p>Participation is voluntary, and you are free to withdraw at any time without penalty. If you choose to withdraw, any data collected up to that point will be discarded.</p>
                     <p>If you have any questions or concerns about the study, please contact the study coordinator.</p>
                 </div>
                 <a href="/flow/age.html" class="start">Agree and proceed with the test</a>

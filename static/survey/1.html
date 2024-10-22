@@ -14,15 +14,19 @@
     <main class="main" >
         <div class="explain-container">
             <div class="content">
-                <p>Which of the two versions of the landing pages would you prefer to view than the other</p>
+                <p>Which of the two versions of the landing pages would you prefer to view than the other?</p>
             </div>
             <div class="radio-container">
                 <form method="post" class="answer">
-                    <div>
-                        <input name="answer" value="1" type="radio" id="first" />
-                        <label for="first">First one</label>
-                        <input name="answer" value="2" type="radio" id="second" / >
-                        <label for="second">Second one</label>
+                    <div class="selection-container">
+                        <div class="selection">
+                            <input name="answer" value="1" type="radio" id="first" />
+                            <label for="first">First one</label>
+                        </div>
+                        <div class="selection">
+                            <input name="answer" value="2" type="radio" id="second" / >
+                            <label for="second">Second one</label>
+                        </div>
                     </div>
                     <a onclick="this.parentNode.submit()">Next -></a>
                 </form> 

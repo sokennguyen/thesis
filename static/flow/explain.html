@@ -25,10 +25,10 @@
                     const id = window.location.search.substr(1)
                     const numberedId = id.split("=")[1]
                     if (numberedId % 2 !== 0){
-                        const newTab = window.open('/first-ver?'+id, '_blank');
+                        const newTab = window.open('/flow/welcome1.html?'+id, '_blank');
                     }
                     else {
-                        const newTab = window.open('/second-ver?'+id, '_blank');
+                        const newTab = window.open('/flow/welcome2.html?'+id, '_blank');
                     }
                     window.location.href = "/flow/interim.html?"+id
                 }

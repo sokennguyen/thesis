@@ -33,7 +33,7 @@ main {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 20px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -112,23 +112,33 @@ main {
     border-radius: 1rem;
     color:white;
     background-color: purple;
+    float: right;
+}
+.selection-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    user-select: none;
+}
+.selection label:hover{
+    cursor: pointer; 
 }
 .explain-container {
     font-size: 2rem;
     margin: 0 6rem;
 }
-.explain-container a{
-    float: right;
-}
-.explain-container .form-container{
+.explain-container form{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+}
+.explain-container a{
+    align-self: end;
 }
 .explain-container textarea{
     width: 40rem;
     height: 10rem;
-    resize: none;
 }
 .explain-container .highlight {
     color: blue;
@@ -138,4 +148,44 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 0px;
+}
+@media only screen and (min-width: 1400px) {
+    .title .hero {
+        font-size: 6rem;
+    }     
+    .title .sub {
+        font-size: 3rem;
+    }
+    .note {
+        font-size: 2rem;
+    }
+    .modal{
+        padding-top: 100px;
+    }
+    .modal-content{
+        font-size: 2rem;
+    }
+    .big-question .question {
+        font-size: 6rem;
+    }
+    .big-question input {
+        font-size: 3rem;
+    }
+    .big-question .answer a {
+        font-size: 3rem;
+    }
+    .explain-container {
+        font-size: 3.2rem;
+    }
+    .explain-container a {
+        font-size: 3rem;
+    }
+    input[type='radio']{
+        transform: scale(2);
+    }
+    .explain-container textarea{
+        width: 60rem; 
+        height: 30rem;
+        border: solid 2px;
+    }
 }

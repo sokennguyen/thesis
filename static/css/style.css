@@ -248,3 +248,75 @@ footer a:hover{
 .logo img{
     width: 100%;
 }
+@media only screen and (min-width: 1400px) {
+    .nav-link {
+        font-size: 2.6rem;
+    }
+    .nav-link-container{
+        height: 4.4rem;
+    }
+    header .logo{
+        width: 400px;
+    }
+    .hero .title .first, .hero .title .second{
+        font-size: 8rem;
+    }
+    .hero .sub-title{
+        font-size: 3rem;
+    }
+    .hero .cta {
+        font-size: 3rem;
+    }
+    .hero a {
+        font-size: 2.5rem;
+    }
+    .feat {
+        width: 500px;
+    }
+    .feat-list{
+        margin-bottom: 12rem;
+    }
+    .benefit {
+        width: 500px;
+        height: 560px;
+    }
+    .benefit .title {
+        font-size: 3.8rem;
+    }
+    .benefit .desc {
+        font-size: 2.5rem;
+    }
+    section[class*='big-feat'] .container{
+        width: 38rem;
+    }
+    section[class*='big-feat'] .title{
+        font-size: 7rem;
+    }
+    section[class*='big-feat'] .desc{
+        font-size: 3rem;
+    }
+    #big-feat2-cta {
+        font-size: 2rem;
+    }
+    #big-feat3-more, #big-feat4-more{
+        font-size: 3rem;
+    }
+    section.cta .title {
+        font-size: 8rem;
+    }
+    section.cta .desc {
+        font-size: 4rem;
+    }
+    #ending-cta-btn {
+        font-size: 3rem;
+    }
+    footer .logo{
+        width: 400px;
+    }
+    footer .title {
+        font-size: 3rem;
+    }
+    footer .item {
+        font-size: 2rem;
+    }
+}

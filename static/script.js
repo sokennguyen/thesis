@@ -52,31 +52,6 @@ window.onload = function() {
         idleTimeoutInSeconds: 10, 
     });  
 
-    /* 
-    let clickCounts = {
-        'nav-feat': 0,
-        'nav-price': 0,
-        'nav-login': 0,
-        'nav-start': 0,
-        'hero-cta': 0,
-        'hero-login': 0,
-        'small-feat1-img': 0,
-        'small-feat2-img': 0,
-        'small-feat3-img': 0,
-        'headstart': 0,
-        'consistency': 0,
-        'determination': 0,
-        'big-feat1-img': 0,
-        'big-feat2-img': 0,
-        'big-feat3-img': 0,
-        'big-feat4-img': 0,
-        'ending-cta-btn': 0,
-    } 
-    */
-
-
-
-
     // Initialize clickCounts object
     clickElements.forEach(id => {
         clickCountsObj[id] = 0;
@@ -118,7 +93,7 @@ function sendPostRequest(event) {
     let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
     let hoverObj = {"top": timeSpentOnPage}
     hoverTracks.forEach(id => {
-        hoverObj[id] = TimeMe.getTimeOnElementInSeconds(id)
+        hoverObj["hover-"+id] = TimeMe.getTimeOnElementInSeconds(id)
     })
 
     let testObj = {

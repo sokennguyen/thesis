@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title of the document</title>
+
+    <!-- <meta http-equiv="refresh" content="2"> -->
+    <!-- this refreshes the brower every 2 secs -->
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/flow.css">
+
+</head>
+<body>
+    <main class="main" >
+        <div class="explain-container">
+            <div class="content">
+                <h1>Welcome to the study</h1>
+                <h3>Quick notes before you begin</h3>
+                <ol>
+                    <li>
+                        <p>Just do what comes naturally to you when you visit a webpage.</p>
+                    </li>
+                    <li>
+                        <p>When something doesn’t response, don’t worry and continue browsing - this just means it’s not clickable or still loading.</p>
+                    </li>
+                    <li>
+                        <p>When you don’t want to browse the webpage anymore, please close this browser tab and continue with the one you came from.</p>
+                    </li>
+                </ol>
+            </div>
+            <a href="#" onclick="goToTest()">Next</a>
+            <script>
+                const goToTest = () => {
+                    const id = window.location.search.substr(1)
+                    const numberedId = id.split("=")[1]
+                    window.location = '/first-ver?'+id;
+                }
+            </script>
+        </div>
+    </main>
+</body>
+
+</html>

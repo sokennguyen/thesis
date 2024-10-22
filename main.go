@@ -70,7 +70,11 @@ func postLanding(ver int) gin.HandlerFunc {
             combinedData[key] = value
         }
         for key, value := range interaction.Hovers {
-            combinedData[key] = value
+            if combinedData[key] != 0 {
+                combinedData["hover-"+key] = value
+            } else {
+                combinedData[key] = value 
+            }
         }
         fmt.Println(combinedData)
 
@@ -100,6 +104,27 @@ func postLanding(ver int) gin.HandlerFunc {
                     click_bigfeat4_more = ?,
                     click_ending_cta_btn = ?,
                     
+                    hover_nav_feat = ?,
+                    hover_nav_price = ?,
+                    hover_nav_login = ?,
+                    hover_nav_start = ?,
+                    hover_hero_cta = ?,
+                    hover_hero_login = ?,
+                    hover_small_feat1_pic = ?,
+                    hover_small_feat2_pic = ?,
+                    hover_small_feat3_pic = ?,
+                    hover_headstart = ?,
+                    hover_consistency = ?,
+                    hover_determination = ?,
+                    hover_big_feat1_img = ?,
+                    hover_big_feat2_img = ?,
+                    hover_bigfeat2_cta = ?,
+                    hover_big_feat3_img = ?,
+                    hover_bigfeat3_more = ?,
+                    hover_big_feat4_img = ?,
+                    hover_bigfeat4_more = ?,
+                    hover_ending_cta_btn = ?,
+
                     top = ?,
                     hover_hero = ?,
                     hover_feat_list = ?,
@@ -166,35 +191,56 @@ func postLanding(ver int) gin.HandlerFunc {
             combinedData["big-feat4-more"],
             combinedData["ending-cta-btn"],
 
+            combinedData["hover-nav-feat"],
+            combinedData["hover-nav-price"],
+            combinedData["hover-nav-login"],
+            combinedData["hover-nav-start"],
+            combinedData["hover-hero-cta"],
+            combinedData["hover-hero-login"],
+            combinedData["hover-small-feat1-pic"],
+            combinedData["hover-small-feat2-pic"],
+            combinedData["hover-small-feat3-pic"],
+            combinedData["hover-headstart"],
+            combinedData["hover-consistency"],
+            combinedData["hover-determination"],
+            combinedData["hover-big-feat1-img"],
+            combinedData["hover-big-feat2-img"],
+            combinedData["hover-big-feat2-cta"],
+            combinedData["hover-big-feat3-img"],
+            combinedData["hover-big-feat3-more"],
+            combinedData["hover-big-feat4-img"],
+            combinedData["hover-big-feat4-more"],
+            combinedData["hover-ending-cta-btn"],
+
             combinedData["top"],
-            combinedData["hero"],
-            combinedData["feat-list"],
-            combinedData["benefit-list"],
-            combinedData["big-feat-1"],
-            combinedData["big-feat-2"],
-            combinedData["big-feat-3"],
-            combinedData["big-feat-4"],
-            combinedData["head-logo"],
-            combinedData["hero-title"],
-            combinedData["sub-title"],
-            combinedData["headstart-desc"],
-            combinedData["consistency-desc"],
-            combinedData["flexible-desc"],
-            combinedData["determination-desc"],
-            combinedData["big-feat1-desc"],
-            combinedData["big-feat2-desc"],
-            combinedData["big-feat2-cta"],
-            combinedData["big-feat3-desc"],
-            combinedData["big-feat3-more"],
-            combinedData["big-feat4-desc"],
-            combinedData["big-feat4-more"],
-            combinedData["ending-title"],
-            combinedData["ending-subtitle"],
-            combinedData["ending-cta-btn"],
-            combinedData["footer-logo"],
-            combinedData["footer-product"],
-            combinedData["footer-company"],
-            combinedData["footer-legal"],
+            combinedData["hover-hero"],
+            combinedData["hover-feat-list"],
+            combinedData["hover-benefit-list"],
+            combinedData["hover-big-feat-1"],
+            combinedData["hover-big-feat-2"],
+            combinedData["hover-big-feat-3"],
+            combinedData["hover-big-feat-4"],
+            combinedData["hover-head-logo"],
+            combinedData["hover-hero-title"],
+            combinedData["hover-sub-title"],
+            combinedData["hover-headstart-desc"],
+            combinedData["hover-consistency-desc"],
+            combinedData["hover-flexible-desc"],
+            combinedData["hover-determination-desc"],
+            combinedData["hover-big-feat1-desc"],
+            combinedData["hover-big-feat2-desc"],
+            combinedData["hover-big-feat2-cta"],
+            combinedData["hover-big-feat3-desc"],
+            combinedData["hover-big-feat3-more"],
+            combinedData["hover-big-feat4-desc"],
+            combinedData["hover-big-feat4-more"],
+            combinedData["hover-ending-title"],
+            combinedData["hover-ending-subtitle"],
+            combinedData["hover-ending-cta-btn"],
+            combinedData["hover-footer-logo"],
+            combinedData["hover-footer-product"],
+            combinedData["hover-footer-company"],
+            combinedData["hover-footer-legal"],
 
             rowid, // The user ID to identify the row to update
         }
@@ -288,7 +334,11 @@ func postSurvey(c *gin.Context) {
     questionNumberInt,err := strconv.Atoi(questionNumber)
     checkErr(err)
     nextQuestionNumber := questionNumberInt + 1 
-    c.Redirect(http.StatusFound, "/survey/"  + strconv.Itoa(nextQuestionNumber) + ".html?id=" + id)
+    if (nextQuestionNumber < 7) {
+        c.Redirect(http.StatusFound, "/survey/"  + strconv.Itoa(nextQuestionNumber) + ".html?id=" + id)
+    } else {
+        c.Redirect(http.StatusFound, "/survey/thank.html?id=" + id)
+    }
 }
 
 func checkErr(err error) {
