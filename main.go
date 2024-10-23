@@ -355,7 +355,6 @@ func postSurvey(c *gin.Context) {
     fmt.Println("choice: "+answer)
 
 
-    //connect and insert 
     db, err := sql.Open("sqlite3", "./static/db/thesis.db")
     checkErr(err)
 
@@ -380,6 +379,55 @@ func postSurvey(c *gin.Context) {
     } else {
         c.Redirect(http.StatusFound, "/survey/thank.html?id=" + id)
     }
+}
+
+func getFirstMaxHover(c *gin.Context) {
+    db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+    checkErr(err)
+
+    testid := c.Query("id")
+    fmt.Println("testid: " + testid)
+    testidInt, err := strconv.Atoi(testid)
+    checkErr(err)
+
+    rows, err := db.Query("SELECT hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1, hover_big_feat_2, hover_big_feat_3, hover_big_feat_4 FROM main WHERE pid=(?) AND age IS NOT NULL",testidInt)
+    checkErr(err)
+    hovers := make(map[string]float32)
+    for rows.Next() {
+        var hero float32
+        var featlist float32
+        var benefit float32
+        var bigfeat1 float32
+        var bigfeat2 float32
+        var bigfeat3 float32
+        var bigfeat4 float32
+        if err := rows.Scan(&hero, &featlist, &benefit, &bigfeat1, &bigfeat2, &bigfeat3, &bigfeat4); err != nil {
+            checkErr(err)
+        }
+        hovers["hero"] = hero
+        hovers["featlist"] = featlist
+        hovers["benenfit"] = benefit
+        hovers["bigfeat1"] = bigfeat1
+        hovers["bigfeat2"] = bigfeat2
+        hovers["bigfeat3"] = bigfeat3
+        hovers["bigfeat4"] = bigfeat4
+
+    }
+    fmt.Println("sections hover time: ",hovers )
+
+    // Find the maximum hover time
+    var maxSection string
+    var maxHoverTime float32
+
+    for section, hoverTime := range hovers {
+        if hoverTime > maxHoverTime {
+            maxHoverTime = hoverTime
+            maxSection = section
+        }
+    }
+
+    fmt.Printf("Max hover time is %f in section: %s\n", maxHoverTime, maxSection)
+    c.JSON(http.StatusOK, gin.H{"max_hover_time": maxHoverTime, "section": maxSection})
 }
 
 func checkErr(err error) {
@@ -414,6 +462,8 @@ func main() {
 	r.GET("/", getFlow)
 	r.GET("/first-ver", getFirst)
 	r.GET("/second-ver", getSecond)
+
+    r.GET("/session-time", getFirstMaxHover)
 
     r.POST("/flow/age.html", agePost)
     r.POST("/first-ver", postLanding(1))
