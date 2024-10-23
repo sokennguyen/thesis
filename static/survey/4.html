@@ -14,8 +14,8 @@
     <main class="main" >
         <div class="explain-container">
             <div class="content">
-                <div>
-                    image
+                <div class="img-container">
+                    <img id="section-image" alt="section-image"/>
                 </div>
                 <div >
                 </div>
@@ -41,7 +41,8 @@
 
                         const hoverTime = document.getElementById('max-hover-time')
                         hoverTime.innerText = time
-                        
+                        const sectionImage = document.getElementById('section-image')
+                        sectionImage.source = '/assets/misc/' + section + '.png'
                     }
                 </script>
             </div>
