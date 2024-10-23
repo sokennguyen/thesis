@@ -13,26 +13,28 @@
 <body>
     <main class="main" >
         <div class="explain-container">
-            <div class="content">
-                <div class="img-container">
-                    <img id="section-image" alt="section-image"/>
+            <div class="content two-side">
+                <div class="question">
+                    <div class="img-container">
+                        <img id="section-image" alt="section-image"/>
+                    </div>
+                    <p>
+                        In the <span class="highlight">first</span> version of the landing page, you spent 
+                        <span id="max-hover-time" class="highlight">____</span> seconds on this section. Can you share what caught your attention or what might have caused you to stay there?
+                    </p> 
                 </div>
-                <div >
-                </div>
-                <p>
-                    In the <span class="highlight">first</span> version of the landing page, you spent 
-                    <span id="max-hover-time" class="highlight">____</span> seconds on the _____ section. Can you share what caught your attention or what might have caused you to stay there?
-                </p> 
                 <div class="form-container">
-                    <form method="post" class="answer">
-                        <textarea name="answer" placeholder="Your answer here..."></textarea>
-                        <a onclick="this.parentNode.submit()">Next -></a>
-                    </form> 
+                    <div class="another-form-wrapper">
+                        <form method="post" class="answer" >
+                            <textarea name="answer" placeholder="Your answer here..."></textarea>
+                            <a onclick="this.parentNode.submit()">Next</a>
+                        </form> 
+                    </div>
                 </div>
                 <script>
                     window.onload = async () => {
                         const id = window.location.search.substr(1)
-                        const response = await fetch('/session-time?'+id)
+                        const response = await fetch('/first-session-time?'+id)
                         const jsonFromServer = await response.json()
                         const time = await jsonFromServer.max_hover_time
                         const section = await jsonFromServer.section
@@ -42,7 +44,7 @@
                         const hoverTime = document.getElementById('max-hover-time')
                         hoverTime.innerText = time
                         const sectionImage = document.getElementById('section-image')
-                        sectionImage.source = '/assets/misc/' + section + '.png'
+                        sectionImage.src = '/assets/misc/' + section + '.png'
                     }
                 </script>
             </div>

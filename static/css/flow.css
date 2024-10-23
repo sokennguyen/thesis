@@ -126,6 +126,7 @@ main {
 .explain-container {
     font-size: 1.8rem;
     margin: 0 6rem;
+    height: 90%;
 }
 .explain-container form{
     display: flex;
@@ -143,6 +144,52 @@ main {
 .explain-container .highlight {
     color: blue;
 }
+.explain-container .img-container {
+    width: 70%;
+}
+.explain-container .question{
+    display: flex;
+    flex-direction: column;
+}
+.explain-container .img-container {
+    align-self: center;
+}
+.explain-container #section-image {
+    width: 100%;
+    object-fit: scale-down;
+}
+.explain-container .content.two-side {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.explain-container .content.two-side .form-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.explain-container .content.two-side .another-form-wrapper {
+    height: 100%;
+    width: 80%;
+}
+.explain-container .content.two-side textarea{
+    width: 80%;
+    height: 100%;
+}
+.explain-container .content.two-side .answer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
 .end-content {
     display: flex;
     flex-direction: column;
