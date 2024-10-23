@@ -1,3 +1,8 @@
+html{
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+}
 header {
     position: sticky;
     top: 0;
@@ -128,23 +133,24 @@ main{
 }
 .benefit-list{
     margin-bottom: 20rem;
-    padding: 0 8rem;
+    align-self: center;
+    padding: 0 7rem;
     display: flex;
     gap: 3rem;
-    justify-content: space-evenly;
 }
 .benefit{
-    width: 250px;
-    height: 280px;
+    flex:1;
 }
 .benefit img{
     width: 50%;
 }
 .benefit .title{
     font-size: 2.1rem;
+    width: 100%;
     margin-bottom: 1rem;
 }
 .benefit .desc{
+    width: 100%;
     font-size: 1.4rem;
 }
 section.hero{

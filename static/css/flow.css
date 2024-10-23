@@ -124,7 +124,7 @@ main {
     cursor: pointer; 
 }
 .explain-container {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin: 0 6rem;
 }
 .explain-container form{
@@ -175,7 +175,7 @@ main {
         font-size: 3rem;
     }
     .explain-container {
-        font-size: 3.2rem;
+        font-size: 1.8rem;
     }
     .explain-container a {
         font-size: 3rem;
