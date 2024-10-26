@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Title of the document</title>
+    <title>Landing page</title>
 
     <!-- <meta http-equiv="refresh" content="2"> -->
     <!-- this refreshes the brower every 2 secs -->
@@ -15,16 +15,35 @@
 <body>
     <main class="main" >
         <header>
-            <div class="nav-link-container">
-                <a class="nav-link" id="nav-feat" >Features</a>
-                <a class="nav-link" id="nav-price" >Pricing</a>
-            </div>
-            <div class="logo">
-                <img src="./assets/assets-hi/logo.png" id="head-logo" alt="logo"/>
-            </div>
-            <div class="nav-link-container">
-                <a class="nav-link" id="nav-login" >Login</a>
-                <button class="nav-link start" id="nav-start" >Get Started</button>
+            <a id="exit" class="exit" onclick="endLanding()">
+            <!-- post data here -->
+                To finish viewing, click here
+            </a>
+            <script>
+                const endLanding = () => {
+                    const id = window.location.search.substr(1)
+                    const numberedId = id.split("=")[1]
+
+                    if (numberedId % 2 !== 0){
+                        window.location.href = "/flow/interim.html?"+id
+                    }
+                    else {
+                        window.location.href = "/survey/start.html?"+id
+                    }
+                }
+            </script>
+            <div class="header-content">
+                <div class="nav-link-container">
+                    <a class="nav-link" id="nav-feat" >Features</a>
+                    <a class="nav-link" id="nav-price" >Pricing</a>
+                </div>
+                <div class="logo">
+                    <img src="./assets/assets-hi/logo.png" id="head-logo" alt="logo"/>
+                </div>
+                <div class="nav-link-container">
+                    <a class="nav-link" id="nav-login" >Login</a>
+                    <button class="nav-link start" id="nav-start" >Get Started</button>
+                </div>
             </div>
         </header>
         <section class="hero" id="hero">

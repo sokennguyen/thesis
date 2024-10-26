@@ -15,22 +15,23 @@
         <div class="explain-container">
             <div class="content">
                 <p>Now a series of web pages will be presented to you.</p>
-                <p>When you click the "<span class="highlight">Next</span>" button bellow, a new browser tab will be opened with the first web page.</p>
+                <p>When something doesn’t response, don’t worry and continue browsing - this just means it’s not clickable or still loading.</p>
                 <p>Please go through the page just like how you'd normally do when browisng the internet.</p>
                 <p>Try to remember how you feel about the web page, as you will tell those feelings again at the end of this experience.</p>
+                <p>When you click the "<span class="highlight">Next</span>" button bellow, the first version of the web page will appear.</p>
             </div>
-            <a href="#" onclick="newTabAndChangeOg()">Next</a>
+
+            <a href="#" onclick="goToTest()">Next</a>
             <script>
-                const newTabAndChangeOg = () => {
+                const goToTest = () => {
                     const id = window.location.search.substr(1)
                     const numberedId = id.split("=")[1]
                     if (numberedId % 2 !== 0){
-                        const newTab = window.open('/flow/welcome1.html?'+id, '_blank');
+                        window.location = '/first-ver?'+id
                     }
                     else {
-                        const newTab = window.open('/flow/welcome2.html?'+id, '_blank');
+                        window.location = '/second-ver?'+id
                     }
-                    window.location.href = "/flow/interim.html?"+id
                 }
             </script>
         </div>

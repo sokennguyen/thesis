@@ -15,16 +15,38 @@
 <body>
     <main class="main" >
         <header>
-            <div class="nav-link-container">
-                <a class="nav-link" id="nav-feat" href="#">Features</a>
-                <a class="nav-link" id="nav-price" href="#">Pricing</a>
-            </div>
-            <div class="logo">
-                <img src="./assets/assets-lo/logo.png" id="head-logo" alt="logo"/>
-            </div>
-            <div class="nav-link-container">
-                <a class="nav-link" id="nav-login" href="#">Login</a>
-                <button class="nav-link start" id="nav-start" >Get Started</button>
+            <a id="exit" class="exit" onclick="endLanding()">
+                To finish viewing, click here
+            </a>
+            <script>
+                const endLanding = () => {
+                    <!-- post data here -->
+                    const id = window.location.search.substr(1)
+                    const numberedId = id.split("=")[1]
+                    window.location = '/flow/interim.html?'+id;
+
+                    //odd id == first-ver is showed first. Even id == second-ver is showed first
+                    //if second-ver is showed first, interim is followed
+                    if (numberedId % 2 == 0){
+                        window.location.href = "/flow/interim.html?"+id
+                    }
+                    else {
+                        window.location.href = "/survey/start.html?"+id
+                    }
+                }
+            </script>
+            <div class="header-content">
+                <div class="nav-link-container">
+                    <a class="nav-link" id="nav-feat" >Features</a>
+                    <a class="nav-link" id="nav-price" >Pricing</a>
+                </div>
+                <div class="logo">
+                    <img src="./assets/assets-lo/logo.png" id="head-logo" alt="logo"/>
+                </div>
+                <div class="nav-link-container">
+                    <a class="nav-link" id="nav-login" >Login</a>
+                    <button class="nav-link start" id="nav-start" >Get Started</button>
+                </div>
             </div>
         </header>
         <section class="hero" id="hero">
@@ -47,7 +69,7 @@
             <button class="cta" id="hero-cta">
                 Get Planito free
             </button>
-            <a class="login" id="hero-login" href="#">
+            <a class="login" id="hero-login" >
                 Already have an account? Log in
             </a>
         </section>

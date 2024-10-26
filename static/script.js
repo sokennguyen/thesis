@@ -75,6 +75,9 @@ window.onload = function() {
         //TimeMe initialized aboved
         TimeMe.trackTimeOnElement(id);
     })
+
+    const exitLandingLink = document.getElementById('exit')
+    exitLandingLink.onclick = sendPostRequest
 }
 
 
@@ -102,7 +105,35 @@ function sendPostRequest(event) {
     }
     let stringReturn = JSON.stringify(testObj)
     xmlhttp.send(stringReturn);
+    if (path.includes("second")){
+        nextPageSecondVer();
+    }
+    else {
+        nextPageFirstVer();
+    }
 };
 
-const intervalId = setInterval(sendPostRequest, 1000);
+function nextPageFirstVer () {
+    const id = window.location.search.substr(1)
+    const numberedId = id.split("=")[1]
 
+    if (numberedId % 2 !== 0){
+        window.location.href = "/flow/interim.html?"+id
+    }
+    else {
+        window.location.href = "/survey/start.html?"+id
+    }
+}
+
+function nextPageSecondVer () {
+    const id = window.location.search.substr(1)
+    const numberedId = id.split("=")[1]
+    //Odd id == first-ver is showed first. Even id == second-ver is showed first
+    //if second-ver is showed first, interim is followed
+    if (numberedId % 2 !== 0){
+        window.location.href = "/survey/start.html?"+id
+    }
+    else {
+        window.location.href = "/flow/interim.html?"+id
+    }
+}

@@ -7,6 +7,23 @@ header {
     position: sticky;
     top: 0;
     display: flex;
+    flex-direction: column;
+}
+.exit {
+    width: 100%;
+    background-color: purple;
+    text-align: center;
+    color:white;
+    text-decoration: underline;
+}
+.exit:visited{
+    color: white;
+}
+.exit:hover{
+    cursor: pointer;
+}
+.header-content{
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 30px;

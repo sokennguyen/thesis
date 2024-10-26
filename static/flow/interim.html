@@ -15,7 +15,7 @@
         <div class="explain-container">
             <div class="content">
                 <p>You have just gone through one landing page.</p>
-                <p>Now another version of that landing page will be presented to you</p>
+                <p class="highlight">Now another version of that landing page will be presented to you.</p>
                 <p>Now still, please try to remember how you feel about the web page, as you will tell those feelings again at the end of this experience.</p>
             </div>
             <a href="#" onclick="newTabAndChangeOg()">Next</a>
@@ -24,12 +24,11 @@
                     const id = window.location.search.substr(1)
                     const numberedId = id.split("=")[1]
                     if (numberedId % 2 !== 0){
-                        const newTab = window.open('/flow/welcome2.html?'+id, '_blank');
+                        window.location.href = "/second-ver?"+id
                     }
                     else {
-                        const newTab = window.open('/flow/welcome1.html?'+id, '_blank');
+                        window.location.href = "/first-ver?"+id
                     }
-                    window.location.href = "/survey/start.html?"+id
                 }
             </script>
         </div>
