@@ -43,6 +43,12 @@ func getFirst(c *gin.Context) {
 func getSecond(c *gin.Context) {
     c.HTML(http.StatusOK, "second-ver.html", gin.H{})
 }
+func getFirstLikert(c *gin.Context) {
+    c.HTML(http.StatusOK, "likert1.html", gin.H{})
+}
+func getSecondLikert(c *gin.Context) {
+    c.HTML(http.StatusOK, "likert2.html", gin.H{})
+}
 
 func getFlow(c *gin.Context) {
     c.HTML(http.StatusOK, "start.html", gin.H{})
@@ -349,6 +355,68 @@ func getAnswerFromBody(body string) string {
     return values.Get("answer")
 }
 
+func postFirstLikert(c *gin.Context) {
+    stringedBody := getBodyString(c)
+    //parse stringedBody
+    values, err := url.ParseQuery(stringedBody) 
+    checkErr(err)
+
+    // Accessing the values
+    q1 := values.Get("quest1")
+    q2 := values.Get("quest2")
+    q3 := values.Get("quest3")
+    q4 := values.Get("quest4")
+
+    db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+    checkErr(err)
+
+    id := c.Query("id")
+    //if not likert number from url
+    stmt, err := db.Prepare(`UPDATE main 
+                            SET likert_1_1 = ? ,
+                                likert_1_2 = ? ,
+                                likert_1_3 = ? ,
+                                likert_1_4 = ?
+                            WHERE pid = ?`)
+    checkErr(err)
+    res, err := stmt.Exec(q1, q2, q3, q4, id);
+    checkErr(err)
+    fmt.Println(res.RowsAffected());
+
+    c.Redirect(http.StatusFound, "/survey/3.html?id=" + id)
+}
+
+func postSecondLikert(c *gin.Context) {
+    stringedBody := getBodyString(c)
+    //parse stringedBody
+    values, err := url.ParseQuery(stringedBody) 
+    checkErr(err)
+
+    // Accessing the values
+    q1 := values.Get("quest1")
+    q2 := values.Get("quest2")
+    q3 := values.Get("quest3")
+    q4 := values.Get("quest4")
+
+    db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+    checkErr(err)
+
+    id := c.Query("id")
+    //if not likert number from url
+    stmt, err := db.Prepare(`UPDATE main 
+                            SET likert_2_1 = ? ,
+                                likert_2_2 = ?,
+                                likert_2_3 = ?,
+                                likert_2_4 = ?
+                            WHERE pid = ?`)
+    checkErr(err)
+    res, err := stmt.Exec(q1, q2, q3, q4, id);
+    checkErr(err)
+    fmt.Println(res.RowsAffected());
+
+    c.Redirect(http.StatusFound, "/survey/4.html?id=" + id)
+}
+
 func postSurvey(c *gin.Context) {
     stringedBody := getBodyString(c)
     answer := getAnswerFromBody(stringedBody)
@@ -358,12 +426,11 @@ func postSurvey(c *gin.Context) {
     db, err := sql.Open("sqlite3", "./static/db/thesis.db")
     checkErr(err)
 
-    //get questionNumber from url param
     pageUrl := c.Param("pageUrl")
-    questionNumber := strings.Split(pageUrl, ".")[0]
-    fmt.Println("questionNumber: "+questionNumber)
-
     id := c.Query("id")
+    //if not likert
+    //get questionNumber from url param
+    questionNumber := strings.Split(pageUrl, ".")[0]
     stmt, err := db.Prepare("UPDATE main SET survey_"+ questionNumber +" = ? WHERE pid = ?")
     checkErr(err)
     res, err := stmt.Exec(answer, id);
@@ -375,7 +442,13 @@ func postSurvey(c *gin.Context) {
     checkErr(err)
     nextQuestionNumber := questionNumberInt + 1 
     if (nextQuestionNumber < 7) {
-        c.Redirect(http.StatusFound, "/survey/"  + strconv.Itoa(nextQuestionNumber) + ".html?id=" + id)
+        if (questionNumberInt == 2 ){
+            c.Redirect(http.StatusFound, "/likert1?id=" + id)
+        } else if (questionNumberInt == 3 ){
+            c.Redirect(http.StatusFound, "/likert2?id=" + id)
+        } else {
+            c.Redirect(http.StatusFound, "/survey/"  + strconv.Itoa(nextQuestionNumber) + ".html?id=" + id)
+        }
     } else {
         c.Redirect(http.StatusFound, "/survey/thank.html?id=" + id)
     }
@@ -505,12 +578,14 @@ func main() {
     r.Static("/css", "./static/css")
     r.Static("/static", "./static")
     //Gin can only load one of this function
-    r.LoadHTMLFiles("static/index.html", "static/second-ver.html", "static/flow/start.html")
+    r.LoadHTMLFiles("static/index.html", "static/second-ver.html", "static/flow/start.html", "static/survey/likert1.html", "static/survey/likert2.html")
 
 
 	r.GET("/", getFlow)
 	r.GET("/first-ver", getFirst)
 	r.GET("/second-ver", getSecond)
+    r.GET("/likert1", getFirstLikert)
+    r.GET("/likert2", getSecondLikert)
 
     r.GET("/first-session-time", getFirstMaxHover)
     r.GET("/second-session-time", getSecondMaxHover)
@@ -520,6 +595,8 @@ func main() {
     r.POST("/second-ver", postLanding(2))
 
     r.POST("/survey/:pageUrl", postSurvey)
+    r.POST("/likert1", postFirstLikert)
+    r.POST("/likert2", postSecondLikert)
 
 
 	r.Run(":8080")

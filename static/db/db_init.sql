@@ -81,5 +81,13 @@ CREATE TABLE IF NOT EXISTS main (
     survey_3 VARCHAR(255),
     survey_4 VARCHAR(255),
     survey_5 VARCHAR(255),
-    survey_6 VARCHAR(255)
+    survey_6 VARCHAR(255),
+    likert_1_1 INT DEFAULT 1,
+    likert_1_2 INT DEFAULT 1,
+    likert_1_3 INT DEFAULT 1,
+    likert_1_4 INT DEFAULT 1,
+    likert_2_1 INT DEFAULT 1,
+    likert_2_2 INT DEFAULT 1,
+    likert_2_3 INT DEFAULT 1,
+    likert_2_4 INT DEFAULT 1
 )

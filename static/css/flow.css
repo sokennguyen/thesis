@@ -120,13 +120,26 @@ main {
     justify-content: space-evenly;
     user-select: none;
 }
+.selection {
+    display: flex;
+    flex-direction: column;
+}
 .selection label:hover{
     cursor: pointer; 
+}
+.likert.explain-container, .likert .radio-container, .likert-answers{
+    height: 100%;
+    width: auto;
+    font-size: 1.09em;
+    margin: 0 2rem;
 }
 .explain-container {
     font-size: 1.8rem;
     margin: 0 6rem;
     height: 90%;
+}
+.explain-container .likert-answers{
+    gap: 0.1em;
 }
 .explain-container form{
     display: flex;
