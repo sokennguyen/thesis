@@ -33,7 +33,7 @@ main {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 20px; /* Location of the box */
+  padding-top: 40px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -206,7 +206,7 @@ main {
     align-items: center;
     gap: 0px;
 }
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 1600px) {
     .title .hero {
         font-size: 6rem;
     }     
