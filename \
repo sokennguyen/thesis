@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title of the document</title>
+
+    <!-- <meta http-equiv="refresh" content="2"> -->
+    <!-- this refreshes the brower every 2 secs -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/flow.css">
+
+</head>
+<body>
+    <main class="main" >
+        <div class="explain-container">
+            <div class="content">
+                <p>In the <span class="highlight">first</span> version of the landing page, can you describe the loading speed and quality of it's images? What did you do when you noticed that speed and quality? How did you feel about the page in overall because of that action(s)?</p> 
+                <div class="form-container">
+                    <form method="post" class="answer">
+                        <div class="selection-container">
+                            <div class="selection">
+                                <input name="quest1" value="1" type="radio" id="q1-first" />
+                                <label for="q1-first">Strongly Disagree</label>
+                            </div>
+                            <div class="selection">
+                                <input name="quest1" value="2" type="radio" id="q1-second" / >
+                                <label for="q1-second">Disagree</label>
+                            </div>
+                            <div class="selection">
+                                <input name="quest1" value="3" type="radio" id="q1-third" />
+                                <label for="q1-third">Neutral</label>
+                            </div>
+                        </div>
+                        <hr style="width: 100%;"/>
+                        <a onclick="this.parentNode.submit()">Next</a>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

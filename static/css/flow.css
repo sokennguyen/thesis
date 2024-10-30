@@ -121,8 +121,10 @@ main {
     user-select: none;
 }
 .selection {
+    width: fit-content;
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 .selection label:hover{
     cursor: pointer; 
@@ -239,6 +241,8 @@ main {
     }
     input[type='radio']{
         transform: scale(2);
+        align-self: center;
+        width: fit-content;
     }
     .explain-container textarea{
         width: 60rem; 

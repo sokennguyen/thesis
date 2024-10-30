@@ -15,11 +15,46 @@
     <main class="main" >
         <div class="explain-container">
             <div class="content">
-                <p>In the <span class="highlight">second</span> version of the landing page, can you describe the loading speed and quality of it's images? What did you do when you noticed that speed and quality? How did you feel about the page in overall because of that action(s)?</p> 
+                <p>In the <span class="highlight">second</span> version of the landing page? What did you do when you noticed that speed and quality? How did you feel about the page in overall because of that action(s)?</p> 
                 <div class="form-container">
                     <form method="post" class="answer">
-                        <textarea name="answer" placeholder="Your answer here..."></textarea>
-                        <a onclick="this.parentNode.submit()">Next -></a>
+                        <div class="selection-container">
+                            <div class="content">
+                                <p>The images' load speed was: </p>
+                            </div>
+                            <div class="selection">
+                                <input name="quest1" value="1" type="radio" id="q1-first" />
+                                <label for="q1-first">Very Slow</label>
+                            </div>
+                            <div class="selection">
+                                <input name="quest1" value="2" type="radio" id="q1-second" / >
+                                <label for="q1-second">Slow</label>
+                            </div>
+                            <div class="selection">
+                                <input name="quest1" value="3" type="radio" id="q1-third" />
+                                <label for="q1-third">Did not notice</label>
+                            </div>
+                        </div>
+                        <hr style="width: 100%;"/>
+                        <div class="selection-container">
+                            <div class="content">
+                                <p>The images' quality was: </p>
+                            </div>
+                            <div class="selection">
+                                <input name="quest1" value="1" type="radio" id="q1-first" />
+                                <label for="q1-first">Blurry</label>
+                            </div>
+                            <div class="selection">
+                                <input name="quest1" value="3" type="radio" id="q1-third" />
+                                <label for="q1-third">Normal</label>
+                            </div>
+                            <div class="selection">
+                                <input name="quest1" value="3" type="radio" id="q1-third" />
+                                <label for="q1-third">Did not notice</label>
+                            </div>
+                        </div>
+                        <hr style="width: 100%;"/>
+                        <a onclick="this.parentNode.submit()">Next</a>
                     </form> 
                 </div>
             </div>
