@@ -2,9 +2,9 @@
 This repository explores the effects of image loading strategies on landing page performance, providing a comprehensive environment to test and analyze image optimization in a SaaS context.
 
 ## 🌐 Features
-Smart Image Throttling: Simulates load under real-world conditions to assess performance impact.
-Modular Go & JavaScript Integration: Flexible back-end and front-end testing framework.
-In-Depth Performance Analytics: Provides data on load times, user engagement, and conversion.
+#### 1. Smart Image Throttling: Simulates load under real-world conditions to assess performance impact.
+#### 2. Modular Go & JavaScript Integration: Flexible back-end and front-end testing framework.
+#### 3. In-Depth Performance Analytics: Provides data on load times, user engagement, and conversion.
 ## 🚀 Getting Started
 1. Clone the Repository
 Clone the repository locally to access all files and code needed to run the tests.
