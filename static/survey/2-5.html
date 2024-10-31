@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title of the document</title>
+
+    <!-- <meta http-equiv="refresh" content="2"> -->
+    <!-- this refreshes the brower every 2 secs -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/flow.css">
+
+</head>
+<body>
+    <main class="main" >
+        <div class="explain-container">
+            <div class="content">
+                <div class="form-container long">
+                    <form method="post" class="answer">
+                        <div>
+                            <p><b>Overall, the images on the web page made you felt:</b></p> 
+                            <div class="selection-container">
+                                <div class="selection">
+                                    <input name="quest1" value="1" type="radio" id="q1-first" />
+                                    <label for="q1-first">More positive about the product</label>
+                                </div>
+                                <div class="selection">
+                                    <input name="quest1" value="4" type="radio" id="q1-fourth" / >
+                                    <label for="q1-fourth">More negative about the product</label>
+                                </div>
+                                <div class="selection">
+                                    <input name="quest1" value="5" type="radio" id="q1-fifth" / >
+                                    <label for="q1-fifth">Didn't further effect your judgement for the product</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p><b>You felt so because:</b></p>
+                            <textarea name="quest2" placeholder="Your answer here..."></textarea>
+                        </div>
+                        <a onclick="this.parentNode.submit()">Next -></a>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

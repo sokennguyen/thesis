@@ -120,6 +120,13 @@ main {
     justify-content: space-evenly;
     user-select: none;
 }
+.form-container.long .selection-container{
+    flex-direction: column;
+    gap: 20px;
+}
+.form-container.long .selection{
+    flex-direction: row;
+}
 .selection {
     width: fit-content;
     display: flex;
@@ -139,6 +146,8 @@ main {
     font-size: 1.8rem;
     margin: 0 6rem;
     height: 90%;
+    display: flex;
+    flex-direction: column;
 }
 .explain-container .likert-answers{
     gap: 0.1em;
@@ -160,27 +169,42 @@ main {
     color: blue;
 }
 .explain-container .question{
-    width: 70%;
+    height: 40%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
 }
 .explain-container .img-container {
-    width: 100%;
-    align-self: center;
+    width: 50%;
 }
+.explain-container .question-container{
+        width: 30%;
+}
+.explain-container .question p{
+    width: 100%;
+}
+.explain-container .question p:last-child{
+    white-space: nowrap;
+}
+
 .explain-container #section-image {
     width: 100%;
-    object-fit: scale-down;
 }
 .explain-container .content.two-side {
     height: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: start;
+    flex-direction: column;
+    align-items: center;
+}
+.form-container.long{
+    display: flex;
+    flex-direction: column;
 }
 .explain-container .content.two-side .form-container {
     height: 100%;
-    width: 50%;
+    width: 80%;
     display: flex;
     align-items: center;
     text-align: center;
@@ -235,6 +259,12 @@ main {
     }
     .explain-container {
         font-size: 1.8rem;
+    }
+    .content.two-side {
+        gap: 20px;
+    }
+    .explain-container .question-container {
+        font-size: 2rem;
     }
     .explain-container a {
         font-size: 3rem;

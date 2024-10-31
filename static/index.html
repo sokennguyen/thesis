@@ -16,23 +16,9 @@
 <body>
     <main class="main" >
         <header>
-            <a id="exit" class="exit" onclick="endLanding()">
-            <!-- post data here -->
+            <a id="exit" class="exit" >
                 To finish viewing, click here
             </a>
-            <script>
-                const endLanding = () => {
-                    const id = window.location.search.substr(1)
-                    const numberedId = id.split("=")[1]
-
-                    if (numberedId % 2 !== 0){
-                        window.location.href = "/flow/interim.html?"+id
-                    }
-                    else {
-                        window.location.href = "/survey/start.html?"+id
-                    }
-                }
-            </script>
             <div class="header-content">
                 <div class="nav-link-container">
                     <a class="nav-link" id="nav-feat" >Features</a>

@@ -43,12 +43,6 @@ func getFirst(c *gin.Context) {
 func getSecond(c *gin.Context) {
     c.HTML(http.StatusOK, "second-ver.html", gin.H{})
 }
-func getFirstLikert(c *gin.Context) {
-    c.HTML(http.StatusOK, "likert1.html", gin.H{})
-}
-func getSecondLikert(c *gin.Context) {
-    c.HTML(http.StatusOK, "likert2.html", gin.H{})
-}
 
 func getFlow(c *gin.Context) {
     c.HTML(http.StatusOK, "start.html", gin.H{})
@@ -355,38 +349,201 @@ func getAnswerFromBody(body string) string {
     return values.Get("answer")
 }
 
-func postFirstLikert(c *gin.Context) {
-    stringedBody := getBodyString(c)
-    //parse stringedBody
-    values, err := url.ParseQuery(stringedBody) 
-    checkErr(err)
+func postFirstSurvey(ver int) gin.HandlerFunc {
+    fn := func(c *gin.Context){
+        stringedBody := getBodyString(c)
+        //parse stringedBody
+        values, err := url.ParseQuery(stringedBody) 
+        checkErr(err)
 
-    // Accessing the values
-    q1 := values.Get("quest1")
-    q2 := values.Get("quest2")
-    q3 := values.Get("quest3")
-    q4 := values.Get("quest4")
+        // Accessing the values
+        q1 := values.Get("quest1")
+        q2 := values.Get("quest2")
 
-    db, err := sql.Open("sqlite3", "./static/db/thesis.db")
-    checkErr(err)
+        db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+        checkErr(err)
 
-    id := c.Query("id")
-    //if not likert number from url
-    stmt, err := db.Prepare(`UPDATE main 
-                            SET likert_1_1 = ? ,
-                                likert_1_2 = ? ,
-                                likert_1_3 = ? ,
-                                likert_1_4 = ?
-                            WHERE pid = ?`)
-    checkErr(err)
-    res, err := stmt.Exec(q1, q2, q3, q4, id);
-    checkErr(err)
-    fmt.Println(res.RowsAffected());
+        verStr := strconv.Itoa(ver)
+        id := c.Query("id")
+        //if not likert number from url
+        stmt, err := db.Prepare(`UPDATE main 
+                                SET survey_`+verStr+`_1_1 = ? ,
+                                    survey_`+verStr+`_1_2 = ? 
+                                WHERE pid = ? `)
+        checkErr(err)
+        res, err := stmt.Exec(q1, q2, id );
+        checkErr(err)
+        fmt.Println(res.RowsAffected());
 
-    c.Redirect(http.StatusFound, "/survey/3.html?id=" + id)
+        c.Redirect(http.StatusFound, "/survey/"+verStr+"-2.html?id=" + id)
+    }
+    return gin.HandlerFunc(fn)
 }
 
-func postSecondLikert(c *gin.Context) {
+func postSecondSurvey(ver int) gin.HandlerFunc {
+    fn := func(c *gin.Context){
+        stringedBody := getBodyString(c)
+        //parse stringedBody
+        values, err := url.ParseQuery(stringedBody) 
+        checkErr(err)
+
+        // Accessing the values
+        q1 := values.Get("quest1")
+        q2 := values.Get("quest2")
+        q3 := values.Get("quest3")
+
+        db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+        checkErr(err)
+
+
+        verStr := strconv.Itoa(ver)
+        id := c.Query("id")
+        //if not likert number from url
+        stmt, err := db.Prepare(`UPDATE main 
+                                SET survey_`+verStr+`_2_1 = ? ,
+                                    survey_`+verStr+`_2_2 = ? ,
+                                    survey_`+verStr+`_2_3 = ? 
+                                WHERE pid = ? `)
+        checkErr(err)
+        res, err := stmt.Exec(q1, q2, q3, id);
+        checkErr(err)
+        fmt.Println(res.RowsAffected());
+
+        c.Redirect(http.StatusFound, "/survey/"+verStr+"-3.html?id=" + id)
+    }
+    return gin.HandlerFunc(fn)
+}
+
+func postThirdSurvey(ver int) gin.HandlerFunc {
+    fn := func(c *gin.Context){
+        stringedBody := getBodyString(c)
+        //parse stringedBody
+        values, err := url.ParseQuery(stringedBody) 
+        checkErr(err)
+
+        // Accessing the values
+        q1 := values.Get("quest1")
+        q2 := values.Get("quest2")
+
+        db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+        checkErr(err)
+
+
+        verStr := strconv.Itoa(ver)
+        id := c.Query("id")
+        //if not likert number from url
+        stmt, err := db.Prepare(`UPDATE main 
+                                SET survey_`+verStr+`_3_1 = ? ,
+                                    survey_`+verStr+`_3_2 = ? 
+                                WHERE pid = ? `)
+        checkErr(err)
+        res, err := stmt.Exec(q1, q2, id);
+        checkErr(err)
+        fmt.Println(res.RowsAffected());
+
+        c.Redirect(http.StatusFound, "/survey/"+verStr+"-4.html?id=" + id)
+    }
+    return gin.HandlerFunc(fn)
+}
+
+func postFourthSurvey(ver int) gin.HandlerFunc {
+    fn := func(c *gin.Context){
+        stringedBody := getBodyString(c)
+        //parse stringedBody
+        values, err := url.ParseQuery(stringedBody) 
+        checkErr(err)
+
+        // Accessing the values
+        q1 := values.Get("quest1")
+        q2 := values.Get("quest2")
+        q3 := values.Get("quest3")
+
+        db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+        checkErr(err)
+
+
+        verStr := strconv.Itoa(ver)
+        id := c.Query("id")
+        //if not likert number from url
+        stmt, err := db.Prepare(`UPDATE main 
+                                SET survey_`+verStr+`_4_1 = ? ,
+                                    survey_`+verStr+`_4_2 = ? ,
+                                    survey_`+verStr+`_4_3 = ? 
+                                WHERE pid = ? `)
+        checkErr(err)
+        res, err := stmt.Exec(q1, q2, q3, id);
+        checkErr(err)
+        fmt.Println(res.RowsAffected());
+
+        c.Redirect(http.StatusFound, "/survey/"+verStr+"-5.html?id=" + id)
+    }
+    return gin.HandlerFunc(fn)
+}
+
+func postFifthSurvey(ver int) gin.HandlerFunc {
+    fn := func(c *gin.Context){
+        stringedBody := getBodyString(c)
+        //parse stringedBody
+        values, err := url.ParseQuery(stringedBody) 
+        checkErr(err)
+
+        // Accessing the values
+        q1 := values.Get("quest1")
+        q2 := values.Get("quest2")
+
+        db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+        checkErr(err)
+
+
+        verStr := strconv.Itoa(ver)
+        id := c.Query("id")
+        //if not likert number from url
+        stmt, err := db.Prepare(`UPDATE main 
+                                SET survey_`+verStr+`_5_1 = ? ,
+                                    survey_`+verStr+`_5_2 = ? 
+                                WHERE pid = ? `)
+        checkErr(err)
+        res, err := stmt.Exec(q1, q2, id);
+        checkErr(err)
+        fmt.Println(res.RowsAffected());
+        
+        if (ver == 1) {
+            c.Redirect(http.StatusFound, "/flow/interim.html?id=" + id)
+        } else {
+            c.Redirect(http.StatusFound, "/survey/6.html?id=" + id)
+        }
+    }
+    return gin.HandlerFunc(fn)
+}
+
+func postSixthSurvey(c *gin.Context){
+        stringedBody := getBodyString(c)
+        //parse stringedBody
+        values, err := url.ParseQuery(stringedBody) 
+        checkErr(err)
+
+        // Accessing the values
+        q1 := values.Get("quest1")
+        q2 := values.Get("quest2")
+
+        db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+        checkErr(err)
+
+
+        id := c.Query("id")
+        //if not likert number from url
+        stmt, err := db.Prepare(`UPDATE main 
+                                SET survey_6_1 = ? ,
+                                    survey_6_2 = ? 
+                                WHERE pid = ? `)
+        checkErr(err)
+        res, err := stmt.Exec(q1, q2, id);
+        checkErr(err)
+        fmt.Println(res.RowsAffected());
+
+        c.Redirect(http.StatusFound, "/survey/thank.html?id=" + id)
+}
+func postSurveyFirst(c *gin.Context) {
     stringedBody := getBodyString(c)
     //parse stringedBody
     values, err := url.ParseQuery(stringedBody) 
@@ -404,10 +561,8 @@ func postSecondLikert(c *gin.Context) {
     id := c.Query("id")
     //if not likert number from url
     stmt, err := db.Prepare(`UPDATE main 
-                            SET likert_2_1 = ? ,
-                                likert_2_2 = ?,
-                                likert_2_3 = ?,
-                                likert_2_4 = ?
+                            SET ver_1_1 = ? ,
+                                ver_1_2 = ?,
                             WHERE pid = ?`)
     checkErr(err)
     res, err := stmt.Exec(q1, q2, q3, q4, id);
@@ -454,6 +609,7 @@ func postSurvey(c *gin.Context) {
     }
 }
 
+
 func getFirstMaxHover(c *gin.Context) {
     db, err := sql.Open("sqlite3", "./static/db/thesis.db")
     checkErr(err)
@@ -463,8 +619,14 @@ func getFirstMaxHover(c *gin.Context) {
     testidInt, err := strconv.Atoi(testid)
     checkErr(err)
 
+    //odd find not null
     rows, err := db.Query("SELECT hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1, hover_big_feat_2, hover_big_feat_3, hover_big_feat_4 FROM main WHERE pid=(?) AND age IS NOT NULL",testidInt)
     checkErr(err)
+    //even find null
+    if (testidInt % 2 == 0) {
+        rows,err = db.Query("SELECT hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1, hover_big_feat_2, hover_big_feat_3, hover_big_feat_4 FROM main WHERE pid=(?) AND age IS NULL",testidInt)
+        checkErr(err)
+    }
     hovers := make(map[string]float32)
     for rows.Next() {
         var hero float32
@@ -511,9 +673,14 @@ func getSecondMaxHover(c *gin.Context) {
     fmt.Println("testid: " + testid)
     testidInt, err := strconv.Atoi(testid)
     checkErr(err)
-
+    //odd find null
     rows, err := db.Query("SELECT hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1, hover_big_feat_2, hover_big_feat_3, hover_big_feat_4 FROM main WHERE pid=(?) AND age IS NULL",testidInt)
     checkErr(err)
+    //even find not null
+    if (testidInt % 2 == 0) {
+        rows,err = db.Query("SELECT hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1, hover_big_feat_2, hover_big_feat_3, hover_big_feat_4 FROM main WHERE pid=(?) AND age IS NOT NULL",testidInt)
+        checkErr(err)
+    }
     hovers := make(map[string]float32)
     for rows.Next() {
         var hero float32
@@ -578,14 +745,12 @@ func main() {
     r.Static("/css", "./static/css")
     r.Static("/static", "./static")
     //Gin can only load one of this function
-    r.LoadHTMLFiles("static/index.html", "static/second-ver.html", "static/flow/start.html", "static/survey/likert1.html", "static/survey/likert2.html")
+    r.LoadHTMLFiles("static/index.html", "static/second-ver.html", "static/flow/start.html")
 
 
-	r.GET("/", getFlow)
-	r.GET("/first-ver", getFirst)
-	r.GET("/second-ver", getSecond)
-    r.GET("/likert1", getFirstLikert)
-    r.GET("/likert2", getSecondLikert)
+    r.GET("/", getFlow)
+    r.GET("/first-ver", getFirst)
+    r.GET("/second-ver", getSecond)
 
     r.GET("/first-session-time", getFirstMaxHover)
     r.GET("/second-session-time", getSecondMaxHover)
@@ -594,9 +759,17 @@ func main() {
     r.POST("/first-ver", postLanding(1))
     r.POST("/second-ver", postLanding(2))
 
-    r.POST("/survey/:pageUrl", postSurvey)
-    r.POST("/likert1", postFirstLikert)
-    r.POST("/likert2", postSecondLikert)
+    r.POST("/survey/1-1.html", postFirstSurvey(1))
+    r.POST("/survey/2-1.html", postFirstSurvey(2))
+    r.POST("/survey/1-2.html", postSecondSurvey(1))
+    r.POST("/survey/2-2.html", postSecondSurvey(2))
+    r.POST("/survey/1-3.html", postThirdSurvey(1))
+    r.POST("/survey/2-3.html", postThirdSurvey(2))
+    r.POST("/survey/1-4.html", postFourthSurvey(1))
+    r.POST("/survey/2-4.html", postFourthSurvey(2))
+    r.POST("/survey/1-5.html", postFifthSurvey(1))
+    r.POST("/survey/2-5.html", postFifthSurvey(2))
+    r.POST("/survey/6.html", postSixthSurvey)
 
 
 	r.Run(":8080")

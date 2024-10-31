@@ -117,12 +117,16 @@ function nextPageFirstVer () {
     const id = window.location.search.substr(1)
     const numberedId = id.split("=")[1]
 
+    /*
     if (numberedId % 2 !== 0){
-        window.location.href = "/flow/interim.html?"+id
+        window.location.href = "/survey/1-1.html?"+id
     }
     else {
-        window.location.href = "/survey/start.html?"+id
+        window.location.href = "/survey/2-1.html?"+id
+
     }
+    */
+        window.location.href = "/survey/1-1.html?"+id
 }
 
 function nextPageSecondVer () {
@@ -130,10 +134,13 @@ function nextPageSecondVer () {
     const numberedId = id.split("=")[1]
     //Odd id == first-ver is showed first. Even id == second-ver is showed first
     //if second-ver is showed first, interim is followed
+    /*
     if (numberedId % 2 !== 0){
-        window.location.href = "/survey/start.html?"+id
+        window.location.href = "/survey/2-1.html?"+id
     }
     else {
-        window.location.href = "/flow/interim.html?"+id
+        window.location.href = "/survey/1-1.html?"+id
     }
+    */
+    window.location.href = "/survey/2-1.html?"+id
 }
