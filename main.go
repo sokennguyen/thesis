@@ -497,6 +497,7 @@ func postFifthSurvey(ver int) gin.HandlerFunc {
 
         verStr := strconv.Itoa(ver)
         id := c.Query("id")
+        idInt,err := strconv.Atoi(id)
         //if not likert number from url
         stmt, err := db.Prepare(`UPDATE main 
                                 SET survey_`+verStr+`_5_1 = ? ,
@@ -507,7 +508,7 @@ func postFifthSurvey(ver int) gin.HandlerFunc {
         checkErr(err)
         fmt.Println(res.RowsAffected());
         
-        if (ver == 1) {
+        if ((ver == 1 && idInt % 2 != 0) || (ver == 2 && idInt % 2 == 0)) {
             c.Redirect(http.StatusFound, "/flow/interim.html?id=" + id)
         } else {
             c.Redirect(http.StatusFound, "/survey/6.html?id=" + id)

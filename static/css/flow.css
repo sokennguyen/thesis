@@ -177,7 +177,12 @@ main {
     gap: 20px;
 }
 .explain-container .img-container {
+    height: 100%;
     width: 50%;
+}
+.explain-container #section-image {
+    height: 100%;
+    object-fit: contain;
 }
 .explain-container .question-container{
         width: 30%;

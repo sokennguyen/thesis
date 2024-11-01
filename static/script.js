@@ -44,8 +44,11 @@ const hoverTracks = [
 
 let clickCountsObj = {};
 
-//TimeMe is a time measuring library included in html
-window.onload = function() {
+//when DOM is loaded, load the time tracking script THEN start loading the images
+//this starts the timer before the images are fully loaded
+//and also allow the user to exit before the images fully loaded
+window.onload = () => {
+    //TimeMe is a time measuring library included in html
     //track hover time
     TimeMe.initialize({
         currentPageName: "my-home-page", // current page
@@ -78,10 +81,17 @@ window.onload = function() {
 
     const exitLandingLink = document.getElementById('exit')
     exitLandingLink.onclick = sendPostRequest
+
+    // Get all images with the data-src attribute
+    const images = document.querySelectorAll("img[data-src]");
+    images.forEach((img) => {
+        // Set the src attribute to the data-src value to trigger loading
+        img.src = img.getAttribute("data-src");
+        img.removeAttribute("data-src"); // Clean up
+    });
 }
 
-
-function sendPostRequest(event) {
+function  sendPostRequest(event) {
     xmlhttp=new XMLHttpRequest();
     const id = window.location.search.substr(1)
     const path = location.pathname.split('/')[1]
@@ -104,20 +114,26 @@ function sendPostRequest(event) {
         "clicks": clickCountsObj
     }
     let stringReturn = JSON.stringify(testObj)
+    //switch page after finishing posting
+    xmlhttp.onload = function() {
+        if (xmlhttp.status >= 200 && xmlhttp.status < 300) {
+            if (path.includes("second")) {
+                nextPageSecondVer();
+            } else {
+                nextPageFirstVer();
+            }
+        } else {
+            console.error("Request failed with status: " + xmlhttp.status);
+        }
+    };
     xmlhttp.send(stringReturn);
-    if (path.includes("second")){
-        nextPageSecondVer();
-    }
-    else {
-        nextPageFirstVer();
-    }
 };
 
 function nextPageFirstVer () {
     const id = window.location.search.substr(1)
-    const numberedId = id.split("=")[1]
 
     /*
+    const numberedId = id.split("=")[1]
     if (numberedId % 2 !== 0){
         window.location.href = "/survey/1-1.html?"+id
     }
@@ -126,15 +142,15 @@ function nextPageFirstVer () {
 
     }
     */
-        window.location.href = "/survey/1-1.html?"+id
+    window.location.href = "/survey/1-1.html?"+id
 }
 
 function nextPageSecondVer () {
     const id = window.location.search.substr(1)
-    const numberedId = id.split("=")[1]
     //Odd id == first-ver is showed first. Even id == second-ver is showed first
     //if second-ver is showed first, interim is followed
     /*
+    const numberedId = id.split("=")[1]
     if (numberedId % 2 !== 0){
         window.location.href = "/survey/2-1.html?"+id
     }
