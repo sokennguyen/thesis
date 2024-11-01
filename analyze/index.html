@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Landing page</title>
+
+    <!-- <meta http-equiv="refresh" content="2"> -->
+    <!-- this refreshes the brower every 2 secs -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/assets/dependencies/timeme.min.js"></script>
+    <script src="./heatmap.js-2.0.5/build/heatmap.min.js"></script>
+    <script src="./heatscript.js"></script>
+</head>
+<body>
+    <main class="main" >
+        <div id="heatmapContainer">
+        <header>
+            <a id="exit" class="exit" >
+                To finish viewing, click here
+            </a>
+            <div class="header-content">
+                <div class="nav-link-container">
+                    <a class="nav-link" id="nav-feat" >Features</a>
+                    <a class="nav-link" id="nav-price" >Pricing</a>
+                </div>
+                <div class="logo">
+                    <img data-src="../static/assets/assets-hi/logo.png" id="head-logo" alt="logo"/>
+                </div>
+                <div class="nav-link-container">
+                    <a class="nav-link" id="nav-login" >Login</a>
+                    <button class="nav-link start" id="nav-start" >Get Started</button>
+                </div>
+            </div>
+        </header>
+        <section class="hero" id="hero">
+            <div class="title" id="hero-title">
+                <div class="first">
+                    Results start with 
+                </div>
+                <div class="second">
+                    a clear plan
+                </div>
+            </div>
+            <div class="sub-title" id="sub-title">
+                <div class="first">
+                    A tool to clarify your project into specific tasks
+                </div>
+                <div class="second">
+                    so it unfolds in front of you
+                </div>
+            </div>
+            <button class="cta" id="hero-cta">
+                Get Planito free
+            </button>
+            <a class="login" id="hero-login" >
+                Already have an account? Log in
+            </a>
+        </section>
+        <section class="feat-list" id="feat-list">
+            <div class="feat">
+                <div class="pic" >
+                    <img data-src="../static/assets/assets-hi/feat1.png" id="small-feat1-pic" alt="feat1"/>
+                </div>
+            </div>
+            <div class="feat">
+                <div class="pic" >
+                    <img data-src="../static/assets/assets-hi/feat2.png" id="small-feat2-pic" alt="feat2"/>
+                </div>
+            </div>
+            <div class="feat">
+                <div class="pic" >
+                    <img data-src="../static/assets/assets-hi/feat3.png" id="small-feat3-pic" alt="feat3"/>
+                </div>
+            </div>
+        </section>
+        <section class="benefit-list" id="benefit-list">
+            <div class="benefit">
+                <img data-src="../static/assets/assets-hi/headstart.png" id="headstart" alt="headstart">
+                <div class="title">
+                    Head Start
+                </div>
+                <div class="desc" id="headstart-desc">
+                    Break out of confussion with a clear defined plan.
+                </div>
+            </div>
+            <div class="benefit">
+                <img data-src="../static/assets/assets-hi/consistency.png" id="consistency" alt="consistency">
+                <div class="title">
+                    Consistency
+                </div>
+                <div class="desc" id="consistency-desc">
+                    Start the day knowing what needs to be done, and do it
+                </div>
+            </div>
+            <div class="benefit">
+                <img data-src="../static/assets/assets-hi/flexible.png" id="flexible" alt="flexible">
+                <div class="title">
+                    Flexibility
+                </div>
+                <div class="desc" id="flexible-desc">
+                    Move tasks around when the unseeable changes happen
+                </div>
+            </div>
+            <div class="benefit">
+                <img data-src="../static/assets/assets-hi/determination.png" id="determination" alt="determination">
+                <div class="title">
+                    Determination
+                </div>
+                <div class="desc" id="determination-desc">
+                    See both your accomplishments and challenges lie in front of you.
+                </div>
+            </div>
+        </section>
+        <section class="big-feat-1" id="big-feat-1">
+            <div class="item left">
+                <div class="container" id="big-feat1-desc">
+                    <div class="title">
+                        Identify tasks
+                    </div>
+                    <div class="desc">
+                        Use Planito to get to know your project. Think of the project's precise components and combine them into sections that can be completed as a group, with the help of highlights and titles. 
+                    </div>
+                </div>
+            </div>
+            <div class="item right">
+                <div class="container">
+                    <img data-src="../static/assets/assets-hi/knowahead.png" id="big-feat1-img" alt="know-ahead"/>
+                </div>
+            </div>
+        </section>
+        <section class="big-feat-2" id="big-feat-2">
+            <div class="item left">
+                <div class="container" >
+                    <img data-src="../static/assets/assets-hi/adjustment.png" id="big-feat2-img" alt="adjustable"/>
+                </div>
+            </div>
+            <div class="right item">
+                <div class="container" id="big-feat2-desc">
+                    <div class="title">
+                        Adapt to changes
+                    </div>
+                    <div class="desc">
+                        Planito Calendar is designed for you to put your todos on and off, flexibly. You can plan your days ahead, and move the tasks around, or add new ones when changes to the plan come up. All depends on the nature of your project.
+                    </div>
+                    <div class="bigfeat2-container">
+                        <button class="big-feat-2 cta" id="big-feat2-cta" >Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="big-feat-3" id="big-feat-3">
+            <div class="left item">
+                <div class="container">
+                    <div class="title">
+                        Cross it done
+                    </div>
+                    <div class="desc" id="big-feat3-desc">
+                        Nothing beats crossing off a goal you've set out for yourself. With just a click, you can change your todos to doing or done. Panito also shows your accomplishments along side of your next goals, to let you know what you've achieved.
+                    </div>
+                    <a class="big-feat3-more" id="big-feat3-more">Learn more</a>
+                </div>
+            </div>
+            <div class="right item">
+                <div class="container">
+                    <img data-src="../static/assets/assets-hi/crossdone.png" id="big-feat3-img" alt="cross-done"/>
+                </div>
+            </div>
+        </section>
+        <section class="big-feat-4" id="big-feat-4">
+            <div class="left item">
+                <div class="container">
+                    <img data-src="../static/assets/assets-hi/stickout.png" id="big-feat4-img" alt="stick-out"/>
+                </div>
+            </div>
+            <div class="right item">
+                <div class="container" id="big-feat4-desc">
+                    <div class="title">
+                        Stick it out,
+                    </div>
+                    <div class="title">
+                        even more
+                    </div>
+                    <div class="desc">
+                        If it is better for you to constantly see the plan and mark it off without a computer, Planito can give you the right format to print your calendar out or set them as your wallpaper. Priority first.
+                    </div>
+                    <a class="big-feat4-more" id="big-feat4-more">Learn more</a>
+                </div>
+            </div>
+        </section>
+        <section class="cta">
+            <div class="title-container" id="ending-title">
+                <div class="title">
+                    Know your plan,
+                </div>
+                <div class="title">
+                    know you can
+                </div>
+            </div>
+            <div class="desc-container" id="ending-subtitle">
+                <div class="desc">
+                    See what needs to be done and fit them 
+                </div>
+                <div class="desc">
+                    into your schedule now
+                </div>
+            </div>
+            <div class="button-container">
+                <button id="ending-cta-btn">Get Planito free</button>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <div class="logo">
+                    <img data-src="../static/assets/assets-hi/logo.png" id="footer-logo" alt="logo"/>
+                </div>    
+                <div class="list" id="footer-product">
+                    <div class="title">
+                        Product
+                    </div>
+                    <a class="item">Chanelog</a>
+                </div>
+                <div class="list" id="footer-company">
+                    <div class="title">
+                        Company
+                    </div>
+                    <a class="item">Philosophy</a>
+                    <a class="item">Status</a>
+                    <a class="item">Twitter</a>
+                    <a class="item">Discord</a>
+                </div>
+                <div class="list" id="footer-legal">
+                    <div class="title">
+                        Legal
+                    </div>
+                    <a class="item">Cookie Policy</a>
+                    <a class="item">Privacy Policy</a>
+                    <a class="item">Term of Service</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    </main>
+</body>
+
+</html>

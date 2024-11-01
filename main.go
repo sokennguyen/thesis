@@ -40,6 +40,7 @@ type InteractionData struct {
 func getFirst(c *gin.Context) {
     c.HTML(http.StatusOK, "index.html", gin.H{})
 }
+
 func getSecond(c *gin.Context) {
     c.HTML(http.StatusOK, "second-ver.html", gin.H{})
 }
@@ -726,6 +727,119 @@ func checkErr(err error) {
     }
 }
 
+func getFirstHovers(c *gin.Context) {
+    db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+    checkErr(err)
+
+    testid := c.Query("id")
+    fmt.Println("testid: " + testid)
+    testidInt, err := strconv.Atoi(testid)
+    checkErr(err)
+
+    //odd find not null
+    rows, err := db.Query(`SELECT hover_nav_feat, hover_nav_price, hover_nav_login, hover_nav_start,
+                                hover_hero_cta, hover_hero_login, hover_small_feat1_pic, hover_small_feat2_pic,
+                                hover_small_feat3_pic, hover_headstart, hover_consistency, hover_determination,
+                                hover_big_feat1_img, hover_big_feat2_img, hover_big_feat3_img, hover_big_feat4_img,
+                                top, hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1,
+                                hover_big_feat_2, hover_big_feat_3, hover_big_feat_4, hover_head_logo,
+                                hover_hero_title, hover_sub_title, hover_headstart_desc, hover_consistency_desc,
+                                hover_flexible_desc, hover_determination_desc, hover_big_feat1_desc,
+                                hover_big_feat2_desc, hover_bigfeat2_cta, hover_big_feat3_desc, hover_bigfeat3_more,
+                                hover_big_feat4_desc, hover_bigfeat4_more, hover_ending_title, hover_ending_subtitle,
+                                hover_ending_cta_btn, hover_footer_logo, hover_footer_product, hover_footer_company,
+                                hover_footer_legal 
+                            FROM main 
+                            WHERE pid = (?) ORDER BY ROWID ASC LIMIT 1;`,testidInt)
+    checkErr(err)
+    //even find null
+    if (testidInt % 2 == 0) {
+        rows,err = db.Query("SELECT hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1, hover_big_feat_2, hover_big_feat_3, hover_big_feat_4 FROM main WHERE pid=(?) AND age IS NULL",testidInt)
+        checkErr(err)
+    }
+    hovers := make(map[string]float32)
+    for rows.Next() {
+        var navFeat, navPrice, navLogin, navStart float32
+        var heroCTA, heroLogin, smallFeat1Pic, smallFeat2Pic, smallFeat3Pic float32
+        var headstart, consistency, determination float32
+        var bigFeat1Img, bigFeat2Img, bigFeat3Img, bigFeat4Img float32
+        var top, hero, featList, benefitList float32
+        var bigFeat1, bigFeat2, bigFeat3, bigFeat4 float32
+        var headLogo, heroTitle, subTitle float32
+        var headstartDesc, consistencyDesc, flexibleDesc, determinationDesc float32
+        var bigFeat1Desc, bigFeat2Desc, bigFeat2CTA, bigFeat3Desc, bigFeat3More float32
+        var bigFeat4Desc, bigFeat4More, endingTitle, endingSubtitle float32
+        var endingCTABtn, footerLogo, footerProduct, footerCompany, footerLegal float32
+
+        if err := rows.Scan(
+            &navFeat, &navPrice, &navLogin, &navStart, &heroCTA, &heroLogin, 
+            &smallFeat1Pic, &smallFeat2Pic, &smallFeat3Pic, &headstart, 
+            &consistency, &determination, &bigFeat1Img, &bigFeat2Img, 
+            &bigFeat3Img, &bigFeat4Img, &top, &hero, &featList, &benefitList, 
+            &bigFeat1, &bigFeat2, &bigFeat3, &bigFeat4, &headLogo, 
+            &heroTitle, &subTitle, &headstartDesc, &consistencyDesc, 
+            &flexibleDesc, &determinationDesc, &bigFeat1Desc, &bigFeat2Desc, 
+            &bigFeat2CTA, &bigFeat3Desc, &bigFeat3More, &bigFeat4Desc, 
+            &bigFeat4More, &endingTitle, &endingSubtitle, &endingCTABtn, 
+            &footerLogo, &footerProduct, &footerCompany, &footerLegal,
+        ); 
+        err != nil {
+            checkErr(err)
+        }
+
+        hovers = map[string]float32{
+            "navFeat": navFeat,
+            "navPrice": navPrice,
+            "navLogin": navLogin,
+            "navStart": navStart,
+            "heroCTA": heroCTA,
+            "heroLogin": heroLogin,
+            "smallFeat1Pic": smallFeat1Pic,
+            "smallFeat2Pic": smallFeat2Pic,
+            "smallFeat3Pic": smallFeat3Pic,
+            "headstart": headstart,
+            "consistency": consistency,
+            "determination": determination,
+            "bigFeat1Img": bigFeat1Img,
+            "bigFeat2Img": bigFeat2Img,
+            "bigFeat3Img": bigFeat3Img,
+            "bigFeat4Img": bigFeat4Img,
+            "top": top,
+            "hero": hero,
+            "featList": featList,
+            "benefitList": benefitList,
+            "bigFeat1": bigFeat1,
+            "bigFeat2": bigFeat2,
+            "bigFeat3": bigFeat3,
+            "bigFeat4": bigFeat4,
+            "headLogo": headLogo,
+            "heroTitle": heroTitle,
+            "subTitle": subTitle,
+            "headstartDesc": headstartDesc,
+            "consistencyDesc": consistencyDesc,
+            "flexibleDesc": flexibleDesc,
+            "determinationDesc": determinationDesc,
+            "bigFeat1Desc": bigFeat1Desc,
+            "bigFeat2Desc": bigFeat2Desc,
+            "bigFeat2CTA": bigFeat2CTA,
+            "bigFeat3Desc": bigFeat3Desc,
+            "bigFeat3More": bigFeat3More,
+            "bigFeat4Desc": bigFeat4Desc,
+            "bigFeat4More": bigFeat4More,
+            "endingTitle": endingTitle,
+            "endingSubtitle": endingSubtitle,
+            "endingCTABtn": endingCTABtn,
+            "footerLogo": footerLogo,
+            "footerProduct": footerProduct,
+            "footerCompany": footerCompany,
+            "footerLegal": footerLegal,
+        }
+    }
+    fmt.Println("sections hover time: ",hovers )
+
+    fmt.Printf("Hover times: %s\n", hovers)
+    c.JSON(http.StatusOK, gin.H{"Hover time": hovers})
+}
 
 
 
@@ -756,6 +870,9 @@ func main() {
     r.GET("/first-session-time", getFirstMaxHover)
     r.GET("/second-session-time", getSecondMaxHover)
 
+    r.GET("/first-hovers", getFirstHovers)
+
+
     r.POST("/flow/age.html", agePost)
     r.POST("/first-ver", postLanding(1))
     r.POST("/second-ver", postLanding(2))
@@ -773,6 +890,6 @@ func main() {
     r.POST("/survey/6.html", postSixthSurvey)
 
 
-	r.Run(":8080")
+    r.Run(":8080")
 }
 
