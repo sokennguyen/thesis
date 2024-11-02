@@ -643,7 +643,7 @@ func getFirstMaxHover(c *gin.Context) {
         }
         hovers["hero"] = hero
         hovers["featlist"] = featlist
-        hovers["benenfit"] = benefit
+        hovers["benefit"] = benefit
         hovers["bigfeat1"] = bigfeat1
         hovers["bigfeat2"] = bigfeat2
         hovers["bigfeat3"] = bigfeat3
@@ -697,7 +697,7 @@ func getSecondMaxHover(c *gin.Context) {
         }
         hovers["hero"] = hero
         hovers["featlist"] = featlist
-        hovers["benenfit"] = benefit
+        hovers["benefit"] = benefit
         hovers["bigfeat1"] = bigfeat1
         hovers["bigfeat2"] = bigfeat2
         hovers["bigfeat3"] = bigfeat3
