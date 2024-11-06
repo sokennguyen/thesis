@@ -48,6 +48,9 @@ func getSecond(c *gin.Context) {
 func getFlow(c *gin.Context) {
     c.HTML(http.StatusOK, "start.html", gin.H{})
 }
+func getFirstHoversPage(c *gin.Context) {
+    c.HTML(http.StatusOK, "first-hovers.html", gin.H{})
+}
 
 //gin.HandlerFunc return *gin.Context
 func postLanding(ver int) gin.HandlerFunc {
@@ -721,14 +724,9 @@ func getSecondMaxHover(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"max_hover_time": maxHoverTime, "section": maxSection})
 }
 
-func checkErr(err error) {
-    if err != nil {
-        panic(err)
-    }
-}
 
 func getFirstHovers(c *gin.Context) {
-    db, err := sql.Open("sqlite3", "./static/db/thesis.db")
+    db, err := sql.Open("sqlite3", "analyze/thesis.db")
     checkErr(err)
 
     testid := c.Query("id")
@@ -741,7 +739,7 @@ func getFirstHovers(c *gin.Context) {
                                 hover_hero_cta, hover_hero_login, hover_small_feat1_pic, hover_small_feat2_pic,
                                 hover_small_feat3_pic, hover_headstart, hover_consistency, hover_determination,
                                 hover_big_feat1_img, hover_big_feat2_img, hover_big_feat3_img, hover_big_feat4_img,
-                                top, hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1,
+                                hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1,
                                 hover_big_feat_2, hover_big_feat_3, hover_big_feat_4, hover_head_logo,
                                 hover_hero_title, hover_sub_title, hover_headstart_desc, hover_consistency_desc,
                                 hover_flexible_desc, hover_determination_desc, hover_big_feat1_desc,
@@ -753,6 +751,7 @@ func getFirstHovers(c *gin.Context) {
                             WHERE pid = (?) ORDER BY ROWID ASC LIMIT 1;`,testidInt)
     checkErr(err)
     //even find null
+    //TODO: copy aboved query to this SELECT
     if (testidInt % 2 == 0) {
         rows,err = db.Query("SELECT hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1, hover_big_feat_2, hover_big_feat_3, hover_big_feat_4 FROM main WHERE pid=(?) AND age IS NULL",testidInt)
         checkErr(err)
@@ -763,7 +762,7 @@ func getFirstHovers(c *gin.Context) {
         var heroCTA, heroLogin, smallFeat1Pic, smallFeat2Pic, smallFeat3Pic float32
         var headstart, consistency, determination float32
         var bigFeat1Img, bigFeat2Img, bigFeat3Img, bigFeat4Img float32
-        var top, hero, featList, benefitList float32
+        var hero, featList, benefitList float32
         var bigFeat1, bigFeat2, bigFeat3, bigFeat4 float32
         var headLogo, heroTitle, subTitle float32
         var headstartDesc, consistencyDesc, flexibleDesc, determinationDesc float32
@@ -775,7 +774,7 @@ func getFirstHovers(c *gin.Context) {
             &navFeat, &navPrice, &navLogin, &navStart, &heroCTA, &heroLogin, 
             &smallFeat1Pic, &smallFeat2Pic, &smallFeat3Pic, &headstart, 
             &consistency, &determination, &bigFeat1Img, &bigFeat2Img, 
-            &bigFeat3Img, &bigFeat4Img, &top, &hero, &featList, &benefitList, 
+            &bigFeat3Img, &bigFeat4Img, &hero, &featList, &benefitList, 
             &bigFeat1, &bigFeat2, &bigFeat3, &bigFeat4, &headLogo, 
             &heroTitle, &subTitle, &headstartDesc, &consistencyDesc, 
             &flexibleDesc, &determinationDesc, &bigFeat1Desc, &bigFeat2Desc, 
@@ -788,51 +787,50 @@ func getFirstHovers(c *gin.Context) {
         }
 
         hovers = map[string]float32{
-            "navFeat": navFeat,
-            "navPrice": navPrice,
-            "navLogin": navLogin,
-            "navStart": navStart,
-            "heroCTA": heroCTA,
-            "heroLogin": heroLogin,
-            "smallFeat1Pic": smallFeat1Pic,
-            "smallFeat2Pic": smallFeat2Pic,
-            "smallFeat3Pic": smallFeat3Pic,
+            "nav-feat": navFeat,
+            "nav-price": navPrice,
+            "nav-login": navLogin,
+            "nav-start": navStart,
+            "hero-cta": heroCTA,
+            "hero-login": heroLogin,
+            "small-feat1-pic": smallFeat1Pic,
+            "small-feat2-pic": smallFeat2Pic,
+            "small-feat3-pic": smallFeat3Pic,
             "headstart": headstart,
             "consistency": consistency,
             "determination": determination,
-            "bigFeat1Img": bigFeat1Img,
-            "bigFeat2Img": bigFeat2Img,
-            "bigFeat3Img": bigFeat3Img,
-            "bigFeat4Img": bigFeat4Img,
-            "top": top,
+            "big-feat1-img": bigFeat1Img,
+            "big-feat2-img": bigFeat2Img,
+            "big-feat3-img": bigFeat3Img,
+            "big-feat4-img": bigFeat4Img,
             "hero": hero,
-            "featList": featList,
-            "benefitList": benefitList,
-            "bigFeat1": bigFeat1,
-            "bigFeat2": bigFeat2,
-            "bigFeat3": bigFeat3,
-            "bigFeat4": bigFeat4,
-            "headLogo": headLogo,
-            "heroTitle": heroTitle,
-            "subTitle": subTitle,
-            "headstartDesc": headstartDesc,
-            "consistencyDesc": consistencyDesc,
-            "flexibleDesc": flexibleDesc,
-            "determinationDesc": determinationDesc,
-            "bigFeat1Desc": bigFeat1Desc,
-            "bigFeat2Desc": bigFeat2Desc,
-            "bigFeat2CTA": bigFeat2CTA,
-            "bigFeat3Desc": bigFeat3Desc,
-            "bigFeat3More": bigFeat3More,
-            "bigFeat4Desc": bigFeat4Desc,
-            "bigFeat4More": bigFeat4More,
-            "endingTitle": endingTitle,
-            "endingSubtitle": endingSubtitle,
-            "endingCTABtn": endingCTABtn,
-            "footerLogo": footerLogo,
-            "footerProduct": footerProduct,
-            "footerCompany": footerCompany,
-            "footerLegal": footerLegal,
+            "feat-list": featList,
+            "benefit-list": benefitList,
+            "big-feat-1": bigFeat1,
+            "big-feat-2": bigFeat2,
+            "big-feat-3": bigFeat3,
+            "big-feat-4": bigFeat4,
+            "head-logo": headLogo,
+            "hero-title": heroTitle,
+            "sub-title": subTitle,
+            "headstart-desc": headstartDesc,
+            "consistency-desc": consistencyDesc,
+            "flexible-desc": flexibleDesc,
+            "determination-desc": determinationDesc,
+            "big-feat1-desc": bigFeat1Desc,
+            "big-feat2-desc": bigFeat2Desc,
+            "big-feat2-cta": bigFeat2CTA,
+            "big-feat3-desc": bigFeat3Desc,
+            "big-feat3-more": bigFeat3More,
+            "big-feat4-desc": bigFeat4Desc,
+            "big-feat4-more": bigFeat4More,
+            "ending-title": endingTitle,
+            "ending-subtitle": endingSubtitle,
+            "ending-cta-btn": endingCTABtn,
+            "footer-logo": footerLogo,
+            "footer-product": footerProduct,
+            "footer-company": footerCompany,
+            "footer-legal": footerLegal,
         }
     }
     fmt.Println("sections hover time: ",hovers )
@@ -841,6 +839,11 @@ func getFirstHovers(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"Hover time": hovers})
 }
 
+func checkErr(err error) {
+    if err != nil {
+        panic(err)
+    }
+}
 
 
 func render(c *gin.Context, template templ.Component, status int) error {
@@ -859,8 +862,9 @@ func main() {
     r.Static("/survey", "./static/survey")
     r.Static("/css", "./static/css")
     r.Static("/static", "./static")
+    r.Static("/analyze", "./analyze")
     //Gin can only load one of this function
-    r.LoadHTMLFiles("static/index.html", "static/second-ver.html", "static/flow/start.html")
+    r.LoadHTMLFiles("static/index.html", "static/second-ver.html", "static/flow/start.html", "analyze/first-hovers.html")
 
 
     r.GET("/", getFlow)
@@ -870,7 +874,9 @@ func main() {
     r.GET("/first-session-time", getFirstMaxHover)
     r.GET("/second-session-time", getSecondMaxHover)
 
+    r.GET("/first-hovers-page", getFirstHoversPage)
     r.GET("/first-hovers", getFirstHovers)
+
 
 
     r.POST("/flow/age.html", agePost)
