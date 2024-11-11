@@ -48,7 +48,7 @@ func getSecond(c *gin.Context) {
 func getFlow(c *gin.Context) {
     c.HTML(http.StatusOK, "start.html", gin.H{})
 }
-func getFirstHoversPage(c *gin.Context) {
+func getHeatmapPage(c *gin.Context) {
     c.HTML(http.StatusOK, "first-hovers.html", gin.H{})
 }
 
@@ -724,7 +724,7 @@ func getSecondMaxHover(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"max_hover_time": maxHoverTime, "section": maxSection})
 }
 
-func getAVGFirstHovers(c *gin.Context) {
+func getFirstHovers(c *gin.Context) {
     db, err := sql.Open("sqlite3", "analyze/thesis.db")
     checkErr(err)
 
@@ -838,43 +838,26 @@ func getAVGFirstHovers(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"Hover time": hovers})
 }
 
-func checkErr(err error) {
-    if err != nil {
-        panic(err)
-    }
-}
 
-func getFirstHovers(c *gin.Context) {
+func getAVGFirstHovers(c *gin.Context) {
     db, err := sql.Open("sqlite3", "analyze/thesis.db")
     checkErr(err)
 
-    testid := c.Query("id")
-    fmt.Println("testid: " + testid)
-    testidInt, err := strconv.Atoi(testid)
-    checkErr(err)
-
     //odd find not null
-    rows, err := db.Query(`SELECT hover_nav_feat, hover_nav_price, hover_nav_login, hover_nav_start,
-                                hover_hero_cta, hover_hero_login, hover_small_feat1_pic, hover_small_feat2_pic,
-                                hover_small_feat3_pic, hover_headstart, hover_consistency, hover_determination,
-                                hover_big_feat1_img, hover_big_feat2_img, hover_big_feat3_img, hover_big_feat4_img,
-                                hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1,
-                                hover_big_feat_2, hover_big_feat_3, hover_big_feat_4, hover_head_logo,
-                                hover_hero_title, hover_sub_title, hover_headstart_desc, hover_consistency_desc,
-                                hover_flexible_desc, hover_determination_desc, hover_big_feat1_desc,
-                                hover_big_feat2_desc, hover_bigfeat2_cta, hover_big_feat3_desc, hover_bigfeat3_more,
-                                hover_big_feat4_desc, hover_bigfeat4_more, hover_ending_title, hover_ending_subtitle,
-                                hover_ending_cta_btn, hover_footer_logo, hover_footer_product, hover_footer_company,
-                                hover_footer_legal 
-                            FROM main 
-                            WHERE pid = (?) ORDER BY ROWID ASC LIMIT 1;`,testidInt)
+    rows, err := db.Query(`SELECT AVG(hover_nav_feat) as hover_nav_feat, AVG(hover_nav_price) as hover_nav_price, AVG(hover_nav_login) as hover_nav_login, AVG(hover_nav_start) as hover_nav_start,
+                                AVG(hover_hero_cta) as hover_hero_cta, AVG(hover_hero_login) as hover_hero_login, AVG(hover_small_feat1_pic) as hover_small_feat1_pic, AVG(hover_small_feat2_pic) as hover_small_feat2_pic,
+                                AVG(hover_small_feat3_pic) hover_small_feat3_pic, AVG(hover_headstart) as hover_headstart, AVG(hover_consistency) as hover_consistency, AVG(hover_determination) as hover_determination,
+                                AVG(hover_big_feat1_img) as hover_big_feat1_img, AVG(hover_big_feat2_img) as hover_big_feat2_img, AVG(hover_big_feat3_img) as hover_big_feat3_img, AVG(hover_big_feat4_img) as hover_big_feat4_img,
+                                AVG(hover_hero) as hover_hero, AVG(hover_feat_list) as hover_feat_list, AVG(hover_benefit_list) as hover_benefit_list, AVG(hover_big_feat_1) as hover_big_feat_1,
+                                AVG(hover_big_feat_2) as hover_big_feat_2, AVG(hover_big_feat_3) as hover_big_feat_3, AVG(hover_big_feat_4) as hover_big_feat_4, AVG(hover_head_logo) as hover_head_logo,
+                                AVG(hover_hero_title) as hover_hero_title, AVG(hover_sub_title) as hover_sub_title, AVG(hover_headstart_desc) as hover_headstart_desc, AVG(hover_consistency_desc) as hover_consistency_desc,
+                                AVG(hover_flexible_desc) as hover_flexible_desc, AVG(hover_determination_desc) as hover_determination_desc, AVG(hover_big_feat1_desc) as hover_big_feat1_desc,
+                                AVG(hover_big_feat2_desc) as hover_big_feat2_desc, AVG(hover_bigfeat2_cta) as hover_bigfeat2_cta, AVG(hover_big_feat3_desc) as hover_big_feat3_desc, AVG(hover_bigfeat3_more) as hover_bigfeat3_more,
+                                AVG(hover_big_feat4_desc) as hover_big_feat4_desc, AVG(hover_bigfeat4_more) as hover_bigfeat4_more, AVG(hover_ending_title) as hover_ending_title, AVG(hover_ending_subtitle) as hover_ending_subtitle,
+                                AVG(hover_ending_cta_btn) as hover_ending_cta_btn, AVG(hover_footer_logo) as hover_footer_logo, AVG(hover_footer_product) as hover_footer_product, AVG(hover_footer_company) as hover_footer_company,
+                                AVG(hover_footer_legal) as hover_footer_legal
+                            FROM main`)
     checkErr(err)
-    //even find null
-    //TODO: copy aboved query to this SELECT
-    if (testidInt % 2 == 0) {
-        rows,err = db.Query("SELECT hover_hero, hover_feat_list, hover_benefit_list, hover_big_feat_1, hover_big_feat_2, hover_big_feat_3, hover_big_feat_4 FROM main WHERE pid=(?) AND age IS NULL",testidInt)
-        checkErr(err)
-    }
     hovers := make(map[string]float32)
     for rows.Next() {
         var navFeat, navPrice, navLogin, navStart float32
@@ -993,7 +976,7 @@ func main() {
     r.GET("/first-session-time", getFirstMaxHover)
     r.GET("/second-session-time", getSecondMaxHover)
 
-    r.GET("/first-hovers-page", getFirstHoversPage)
+    r.GET("/heatmap-page", getHeatmapPage)
     r.GET("/first-hovers", getFirstHovers)
     r.GET("/avg-first-hovers", getAVGFirstHovers)
 

@@ -9,7 +9,7 @@ window.onload = async () => {
 
     //get hovers data
     const id = window.location.search.substr(1)
-    const response = await fetch('http://localhost:8080/first-hovers?' + id, {
+    const response = await fetch('http://localhost:8080/avg-first-hovers?' + id, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
