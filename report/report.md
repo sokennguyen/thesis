@@ -57,9 +57,14 @@ After that, to determine the impact of image performance on participants views o
 
 (((average hovering time analysis)))
 
-(((Max time on page entry analysis)))
+(((Max time on page entry analysis
+Note: they rest their mouse on an element for a long time, perhaps to read surrounding elements
+)))
 
-(((Min time on page entry analysis)))
+(((Min time on page entry analysis
+Note: they jump their mouse all over the page
+)))
+
 
 
     3 Glossary
