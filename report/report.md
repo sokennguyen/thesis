@@ -49,21 +49,37 @@ The surveying parts of the experiments are there for both contribute to the anal
 With the collected dataset, the study can apply some analysis onto them to understand subjects' behaviours, an through that, to answer the two research questions. With the two research questions as the aim to achieve, this analysis will also be splitted into two sections. Successfully answering the first question with partly provide a path to answer the second one, as the dataset have been understood more clearly.
 
     4.1 The impact of image performance
-Before jumping into the specific analysis of the dataset, there is a need to zone in the focus area of the it. The first time in the experiment that the participant see the landing page is the one that is more suitable for analysing, as it is their first impression of the content of the webpage. 
+Before jumping into the specific analysis of the dataset, there is a need to zone in the focus area of the it. The overall impact of image performance can be measured by combining the data of both the blurry version and slow loading version of the landing page. 
 
-After that, to determine the impact of image performance on participants views of the landing pages, the first aspect that need to be indentified is how what the subject is paying attention to when they browse. Assuming that the more the subject hover over an element, the more attention they have put onto that element. On the other hand, the less hover time the element has, the less attention it has been put on by the participant. 
+After that, to determine the impact of image performance on participants views of the landing pages, the first aspect that need to be indentified is how what the subject is paying attention to when they browse. Assuming that the more time the subject spent hovering over an element, the more attention they have put onto that element. On the other hand, the less hover time the element has, the less attention it has been put on by the participant. 
 (((find source if possible)))
 
 
-(((average hovering time analysis)))
+(((average hover time image here)))
 
-(((Max time on page entry analysis
-Note: they rest their mouse on an element for a long time, perhaps to read surrounding elements
-)))
+When looking at the average hover time of all entries, we can see the largest time combined are spent in viewing the hero section of the website. This is expected, as it is the first section that shows up to the participants when they enter the site. Combined with the description that promises and give information on what the site is about, the hero title has been able to capture the users' attention like how it's supposed to be.
 
-(((Min time on page entry analysis
-Note: they jump their mouse all over the page
-)))
+To understand which elements or sections of the landing page, further than the hero section, we can follow the users' journey and look at the lower sections as they have also scrolled down. The two most viewed section beside from the hero section is the list of features that consist three big images right below the hero section, and the big second feature showcasing that includes the image of the feature and a paragraph of description on the right of it, with the title of "Adapt to changes".
+
+These two sections have almost equal hovering time. The benefit list has approximately 3.6 seconds of hovering time, and the feature showcasing has a slightly larger view time being approximately 4.1 seconds. The five hundreds miliseconds might seem little at first, but this is actually a notable gap because not only this is the average of 20 subjects, but also the browsing speed and behaviours can varies among participants. The differences can be further demonstrated in the later points.
+
+What similar about these two sections is not only their seemingly similar load time, but also their image size. Each images of the benefit list is smaller than the one at the feature showcase, but when combined together, they create a whole section consist of only images. That whole section full of images is larger than the one image at the feature showcase section. The two most notably viewed sections being the ones with images of the larger size. This can translate into that subjects paid more attention to sections consisting of larger, more detailed images than the sections that have little or no images at all. 
+
+Broadening the range from the two most viewed elements that separate themselves from the others, the three elements that have lower hovering time also share this trait. The three other feature showcasing session with their hovering time of 3.2, 1.93 and 1.87 seconds. These three sections have the same characteristics as the most hovered element at 4.1 seconds, but because of their position on the page, their hovering time are different from each other. Sharpness and load speed when combined with positioning can produce this difference in hovering time. 
+
+In average, participants pay more attention to sections that have impressive and detailed images than the ones without. To see more precisely how image effect each individual when they browse landing pages, further examinations are needed in one specific participant entry. First the highest hovering time entry will be viewed, following by the lowesthovering time entry.
+
+The poportions of that the participant with the highest time on page is almost the same as the measurements that have just been analyzed. The benefit list and the "Adapt to changes" feature showcasing remains to be the two longest viewed sections. In this entry, the attentive participant spent a significant time viewing the section with the big image, with the total of 31 seconds. This amount of time is almost equal to the hovering time of the hero section, which was 38 seconds, and tripple the second highest element of 10 seconds.  
+
+(((Max time on page entry's max hovered element image )))
+
+When looking further into distribution of time this subject has spent for this section, more can be realized. The image of this section is being paid more attention than the descriptive texts that lies next to it. This entry's first version of the landing page shown to this participant is the one with low quality images. Because of this, this participant's long hovering bahaviour on the image might have happen due to him or her trying to read the blurry text on the images. 
+
+This can be confirmed by the answered they gave to the questions on the survey about this matter. On the question asking for the image's quality, the participants asnwered with the lowest option of "blurry". But even though the images sharpness was poor, the participants answered that those images still made them stopped scrolling and read around those blurry images, and the texts next to it, and it hadn't made them skipped the blurry sections to browse other sections. But after giving all of this attentions, the participant answered that the blurry images was not enough to convince them to know more about the product outside of the landing page, and that they do not want to try the product. Finally the concluded the survey by claim that it was more appealing for him or her to scan the website with the help of images, but the bad image quality did not support them to understand the product, which has formed a bad impression of the company and the product that was presented.
+
+The main learning that these answers provided is that images can have a notable impact on the judgement of an attentive and interested viewer, but capturing their attention is not enough to convert the viewer into an further engagements. Poor quality images overall can turn away an interested viewer, and create a accorded poor brand in the viewer's mind.
+
+(((Min time on page entry's full screen image)))
 
 
 
