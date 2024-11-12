@@ -81,6 +81,9 @@ The main learning that these answers provided is that images can have a notable 
 
 (((Min time on page entry's full screen image)))
 
+The browsing pattern of this paticipant was rapid and move quickly throughout many most parts of the page, trying to find what was interactive. This is the captured hovering time of the participant with the least time spent on page, with a total of only 9 seconds. This behaviour pattern is the opposite of the previous entry, where they stay calm and read or wait the images patiently. Although when scrooling to look for information at a fast rate, the longest viewed time on the page was on the first feature showcase. This section is the first of the section that have a big image as one of its elements. This big image has captivated the attention of the fast browsing subject, with held them down onto one section for 4.5 seconds, which is half of the total time spent on page. Compare that to other elements that the subject just flick through for less than a second, this first feature section has done a decent job of holding extended attention. This understanding is a contribution on clarifying the importance of images on landing page, and its affect on different user personas. People with different browsing habits can have differnt perspectives on images, but as in the majority of cases, images are at the core of users' experiences.
+
+5 Conclusion
 
 
     3 Glossary
