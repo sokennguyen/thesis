@@ -54,8 +54,6 @@ In each of those entries, there are ___ elements have been counted for clicks, a
 
 The surveying parts of the experiments are there for both contribute to the analyzation of the interaction dataset and to support the claims that arrives from such analyzation. Because these questions are asked right after the landing pages are being viewed, participants can evaluate the experience they have just been through and give accurate answers.
 
-In the dataset, each entries is consist of two rows. 
-
     4 Analysis
 With the collected dataset, the study can apply some analysis onto them to understand subjects' behaviours, and through that, to answer the research question. With the research question as the aim to achieve, this analysis will also be split into two sections. Successfully answering the first question with partly provide a path to answer the second one, as the dataset have been understood more clearly.
 But before jumping into the specific analysis of the dataset, there is a need to zone in the focus area of the it. The overall impact of image performance can be measured by combining the data of both the blurry version and slow loading version of the landing page. 
